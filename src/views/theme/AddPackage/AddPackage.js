@@ -71,7 +71,7 @@ function AddPackage() {
                 <CFormInput
                   type="name"
                   id="exampleFormControlInput1"
-                  placeholder="name of course"
+                  placeholder="name of package"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -124,8 +124,8 @@ function AddPackage() {
               <div className="mb-3">
                 <p>page Description:</p>
                 <ol>
-                  {description?.map((item) => {
-                    return <li>{item}</li>
+                  {description?.map((item, idx) => {
+                    return <li key={idx}>{item}</li>
                   })}
                 </ol>
               </div>

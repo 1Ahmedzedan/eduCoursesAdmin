@@ -11,13 +11,15 @@ import {
   CFormTextarea,
   CRow,
 } from '@coreui/react'
+import axios from 'axios'
 // import { DocsExample } from 'src/components'
 
 function AddCourse() {
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
   const [image, setImage] = useState(null)
   const [preview, setPreview] = useState(null)
   const [description, setDescription] = useState('')
+  const [isCreateCourse, setIsCreateCourse] = useState(false)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -31,9 +33,27 @@ function AddCourse() {
     }
   }
 
-  // const handleSubmitCourse = ()=>{
+  const handleSubmitCourse = (e) => {
+    e.preventDefault()
+    const course = {
+      name: name,
+      image: preview,
+      description: description,
+    }
 
-  // }
+    setIsCreateCourse(true)
+    const token = localStorage.getItem('token')
+    axios
+      .post(`https://courses-website-q0gf.onrender.com/api/course`, course, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {})
+      .then((error) => {
+        console.log('error')
+      })
+  }
   return (
     <CRow>
       <CCol xs={12}>
@@ -44,12 +64,12 @@ function AddCourse() {
           <CCardBody>
             <CForm>
               <div className="mb-3">
-                <CFormLabel htmlFor="exampleFormControlInput1">Name of Course</CFormLabel>
+                <CFormLabel htmlFor="exampleFormControlInput2">Name of Course</CFormLabel>
                 <CFormInput
-                  type="name"
-                  id="exampleFormControlInput1"
+                  type="text"
+                  id="exampleFormControlInput2"
                   placeholder="name of course"
-                  value={name}
+                  defaultValue={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -59,7 +79,7 @@ function AddCourse() {
                   type="file"
                   id="exampleFormControlInput1"
                   placeholder="name of course"
-                  value={name}
+                  // value={image}
                   accept="image/*"
                   onChange={handleImageChange}
                 />
@@ -85,7 +105,12 @@ function AddCourse() {
                 ></CFormTextarea>
               </div>
               <div className="col-auto text-center">
-                <CButton color="primary" type="submit" className="mb-3 w-25">
+                <CButton
+                  color="primary"
+                  type="submit"
+                  className="mb-3 w-25"
+                  onClick={handleSubmitCourse}
+                >
                   Add Course
                 </CButton>
               </div>
