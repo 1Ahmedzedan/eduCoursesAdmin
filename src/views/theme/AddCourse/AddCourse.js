@@ -49,9 +49,14 @@ function AddCourse() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {})
+      .then((response) => {
+        setName('')
+        setImage(null)
+        setPreview(null)
+        setDescription('')
+      })
       .then((error) => {
-        console.log('error')
+        console.log(error)
       })
   }
   return (
@@ -110,8 +115,9 @@ function AddCourse() {
                   type="submit"
                   className="mb-3 w-25"
                   onClick={handleSubmitCourse}
+                  disabled={isCreateCourse}
                 >
-                  Add Course
+                  {isCreateCourse ? 'Loading...' : 'Add Course'}
                 </CButton>
               </div>
             </CForm>

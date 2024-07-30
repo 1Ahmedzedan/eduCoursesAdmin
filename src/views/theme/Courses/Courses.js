@@ -7,7 +7,31 @@ function Courses() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+
   const navigate = useNavigate()
+
+  async function handleDelete(id) {
+    if (isDeleting) return
+    setIsDeleting(true)
+    const token = localStorage.getItem('token')
+
+    axios
+      .delete(`https://courses-website-q0gf.onrender.com/api/course?courseId=${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
+      .finally(() => {
+        setIsDeleting(false)
+      })
+  }
 
   useEffect(() => {
     axios
@@ -28,7 +52,7 @@ function Courses() {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [isDeleting])
   if (loading) {
     return <div>Loading...</div>
   }
@@ -71,7 +95,11 @@ function Courses() {
       renderCell: (params) => {
         return (
           <div className="d-flex">
-            <p className="mb-0 me-3 text-danger fw-bold" style={{ cursor: 'pointer' }}>
+            <p
+              className="mb-0 me-3 text-danger fw-bold"
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleDelete(params.row.id)}
+            >
               Delete
             </p>
             <p className="mb-0 me-3 text-success fw-bold" style={{ cursor: 'pointer' }}>
@@ -86,17 +114,6 @@ function Courses() {
     },
   ]
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ]
   return (
     <div>
       <div className="d-flex justify-content-end mb-4">
