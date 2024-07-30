@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import vercel from 'vite-plugin-vercel'
 import path from 'node:path'
 import autoprefixer from 'autoprefixer'
 
@@ -8,7 +7,7 @@ export default defineConfig(() => {
   return {
     base: './',
     build: {
-      outDir: 'build',
+      outDir: 'dist',
     },
     css: {
       postcss: {
@@ -30,7 +29,7 @@ export default defineConfig(() => {
         },
       },
     },
-    plugins: [react(), vercel()],
+    plugins: [react()],
     resolve: {
       alias: [
         {
