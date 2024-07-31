@@ -62,7 +62,7 @@ function AddLesson() {
                   type="text"
                   id="exampleFormControlInput2"
                   placeholder="name of lesson"
-                  defaultValue={name}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
                 <div className="col-auto text-center">

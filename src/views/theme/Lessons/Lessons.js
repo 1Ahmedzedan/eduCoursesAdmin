@@ -18,7 +18,7 @@ function Lessons() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/api/course?courseId=${id}`, {
+      .delete(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +43,6 @@ function Lessons() {
         },
       })
       .then((response) => {
-        console.log(response)
         const transformedData = response.data.lessonsPref.map((item) => ({
           id: item.id,
           name: item.name,
