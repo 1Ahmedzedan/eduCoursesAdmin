@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const AddCourse = React.lazy(() => import('./views/theme/AddCourse/AddCourse'))
+const EditCourse = React.lazy(() => import('./views/theme/EditCourse/EditCourse'))
 const AddPackage = React.lazy(() => import('./views/theme/AddPackage/AddPackage'))
 const EditPackage = React.lazy(() => import('./views/theme/EditPackage/EditPackage'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
@@ -64,6 +65,7 @@ const routes = [
   { path: '/courses', name: 'Colors', element: Courses },
   { path: '/packages', name: 'Colors', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
+  { path: '/editCourse/:courseID', name: 'addCourse', element: EditCourse },
   { path: '/addPackage', name: 'addCourse', element: AddPackage },
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
   { path: '/theme/typography', name: 'Typography', element: Typography },

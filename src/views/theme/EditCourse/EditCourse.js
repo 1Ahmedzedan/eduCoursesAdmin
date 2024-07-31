@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -12,14 +12,18 @@ import {
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
-function AddCourse() {
+function EditCourse() {
+  const { courseID } = useParams()
   const [name, setName] = useState('')
   const [image, setImage] = useState(null)
   const [preview, setPreview] = useState(null)
   const [description, setDescription] = useState('')
-  const [isCreateCourse, setIsCreateCourse] = useState(false)
+  const [course, setCourse] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [isGetCourse, setIsGetCourse] = useState(false)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -33,38 +37,74 @@ function AddCourse() {
     }
   }
 
-  const handleSubmitCourse = (e) => {
+  const handleEditing = (e) => {
     e.preventDefault()
-    const course = {
+
+    const token = localStorage.getItem('token')
+    const editCourse = {
+      ...course,
       name: name,
       image: preview,
       description: description,
     }
 
-    setIsCreateCourse(true)
-    const token = localStorage.getItem('token')
+    setIsEditing(true)
     axios
-      .post(`https://courses-website-q0gf.onrender.com/api/course`, course, {
+      .put(`https://courses-website-q0gf.onrender.com/api/course`, editCourse, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {
-        setName('')
-        setImage(null)
-        setPreview(null)
-        setDescription('')
+      .then((response) => {
+        // setData(response.data.content);
+        // setLoading(false);
+
+        console.log(response.data)
       })
-      .then((error) => {
+      .catch((error) => {
+        // setError(error);
+        // setLoading(false);
         console.log(error)
       })
+      .finally(() => {
+        setIsEditing(false)
+      })
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    setIsGetCourse(true)
+    axios
+      .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const course = response.data
+        setCourse(course)
+        setName(course.name)
+        setPreview(course.image)
+        setDescription(course.description)
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
+      .finally(() => {
+        setIsGetCourse(false)
+      })
+  }, [])
+
+  if (isGetCourse) {
+    return <div>Loading...</div>
+  }
+
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Add Course</strong>
+            <strong>Edit Course</strong>
           </CCardHeader>
           <CCardBody>
             <CForm>
@@ -106,6 +146,7 @@ function AddCourse() {
                 <CFormTextarea
                   id="exampleFormControlTextarea1"
                   rows={3}
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></CFormTextarea>
               </div>
@@ -114,52 +155,18 @@ function AddCourse() {
                   color="primary"
                   type="submit"
                   className="mb-3 w-25"
-                  onClick={handleSubmitCourse}
-                  disabled={isCreateCourse}
+                  onClick={handleEditing}
+                  disabled={isEditing}
                 >
-                  {isCreateCourse ? 'Loading...' : 'Add Course'}
+                  {isEditing ? 'Loading...' : 'Edit Course'}
                 </CButton>
               </div>
             </CForm>
           </CCardBody>
         </CCard>
       </CCol>
-      {/* <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Add Course</strong>
-          </CCardHeader>
-          <CCardBody>
-            <p className="text-body-secondary small">
-              Set heights using <code>size</code> property like <code>size=&#34;lg&#34;</code> and{' '}
-              <code>size=&#34;sm&#34;</code>.
-            </p>
-            <DocsExample href="forms/form-control#sizing">
-              <CFormInput
-                type="text"
-                size="lg"
-                placeholder="Large input"
-                aria-label="lg input example"
-              />
-              <br />
-              <CFormInput
-                type="text"
-                placeholder="Default input"
-                aria-label="default input example"
-              />
-              <br />
-              <CFormInput
-                type="text"
-                size="sm"
-                placeholder="Small input"
-                aria-label="sm input example"
-              />
-            </DocsExample>
-          </CCardBody>
-        </CCard>
-      </CCol> */}
     </CRow>
   )
 }
 
-export default AddCourse
+export default EditCourse
