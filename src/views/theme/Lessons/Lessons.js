@@ -81,14 +81,12 @@ function Lessons() {
             >
               Delete
             </p>
+
             <p
-              className="mb-0 me-3 text-success fw-bold"
+              className="mb-0 me-3 fw-bold"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate(`/editCourse/${params.row.id}`)}
+              onClick={() => navigate(`/lessonQuestion/${params.row.id}`)}
             >
-              Edite
-            </p>
-            <p className="mb-0 me-3 fw-bold" style={{ cursor: 'pointer' }}>
               View
             </p>
           </div>

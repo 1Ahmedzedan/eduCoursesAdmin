@@ -1,0 +1,159 @@
+.question_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.answerForm {
+  padding: 0 40px;
+  display: block;
+  width: 100%;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  padding: 0 15px;
+  width: fit-content;
+  min-width: 300px;
+}
+
+.answer label {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.answer input {
+  -ms-transform: scale(2);
+  -webkit-transform: scale(2);
+  transform: scale(2);
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.btns button {
+  font-size: 32px;
+  box-shadow: 0px 0px 8px 2px rgb(0 0 0 / 20%);
+}
+
+.explain_btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 0 20px;
+}
+
+.explain_btn p {
+  font-size: 22px;
+  padding-top: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+}
+
+.explain_btn span {
+  color: rgba(244, 208, 63, 1);
+}
+
+.repeat_btn {
+  background-color: #7d3c98;
+  color: white;
+  padding: 0 20px;
+  border-radius: 25px;
+}
+
+.repeat_btn:hover {
+  background-color: #7c3c98e9;
+}
+
+.explain_btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.submit_answer_btn {
+  background-color: #7d3c98;
+  color: white;
+  font-size: 26px;
+  font-weight: 500;
+  width: 50%;
+  border-radius: 25px;
+  padding: 5px 0;
+}
+
+.submit_answer_btn:hover {
+  background-color: #7c3c98e9;
+}
+
+.correct_option {
+  background-color: #d5f5e3;
+}
+
+.wrong_option {
+  background-color: #fadbd8;
+}
+
+.explain_container {
+  padding: 20px;
+  box-shadow: 0px 0px 8px 2px rgb(0 0 0 / 20%);
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.explain_container p {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+@media (width<=750px) {
+  .explain_btn span {
+    font-size: 24px;
+  }
+
+  .explain_btn p {
+    font-size: 18px;
+  }
+
+  .repeat_btn {
+    font-size: 18px;
+  }
+
+  .question {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .answer label {
+    font-size: 20px;
+  }
+
+  .answer input {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+    transform: scale(1.5);
+  }
+
+  .btns button {
+    font-size: 22px;
+  }
+
+  .submit_answer_btn {
+    font-size: 18px;
+    width: 100%;
+  }
+}

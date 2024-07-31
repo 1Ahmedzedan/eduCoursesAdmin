@@ -5,6 +5,9 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
+const QuizAnswerContainer = React.lazy(
+  () => import('./views/theme/QuizAnswerContainer/QuizAnswerContainer'),
+)
 const AddCourse = React.lazy(() => import('./views/theme/AddCourse/AddCourse'))
 const EditCourse = React.lazy(() => import('./views/theme/EditCourse/EditCourse'))
 const AddPackage = React.lazy(() => import('./views/theme/AddPackage/AddPackage'))
@@ -66,6 +69,7 @@ const routes = [
   { path: '/colors', name: 'Colors', element: Colors },
   { path: '/courses', name: 'Colors', element: Courses },
   { path: '/lessons/:courseID', name: 'Colors', element: Lessons },
+  { path: '/lessonQuestion/:lessonID', name: 'Colors', element: QuizAnswerContainer },
   { path: '/packages', name: 'Colors', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
   { path: '/addLesson/:courseID', name: 'addCourse', element: AddLesson },
