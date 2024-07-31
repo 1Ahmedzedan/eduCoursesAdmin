@@ -4,10 +4,12 @@ import Packages from './views/theme/Packages/Packages'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
+const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
 const AddCourse = React.lazy(() => import('./views/theme/AddCourse/AddCourse'))
 const EditCourse = React.lazy(() => import('./views/theme/EditCourse/EditCourse'))
 const AddPackage = React.lazy(() => import('./views/theme/AddPackage/AddPackage'))
 const EditPackage = React.lazy(() => import('./views/theme/EditPackage/EditPackage'))
+const AddLesson = React.lazy(() => import('./views/theme/AddLesson/AddLesson'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
 // Base
@@ -63,8 +65,10 @@ const routes = [
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/colors', name: 'Colors', element: Colors },
   { path: '/courses', name: 'Colors', element: Courses },
+  { path: '/lessons/:courseID', name: 'Colors', element: Lessons },
   { path: '/packages', name: 'Colors', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
+  { path: '/addLesson/:courseID', name: 'addCourse', element: AddLesson },
   { path: '/editCourse/:courseID', name: 'addCourse', element: EditCourse },
   { path: '/addPackage', name: 'addCourse', element: AddPackage },
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
