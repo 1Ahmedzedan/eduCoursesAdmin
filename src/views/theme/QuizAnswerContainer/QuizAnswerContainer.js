@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Question from '../Question/Question'
 import styles from './QuizAnswerContainer.module.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 function QuizAnswerContainer() {
-  const { lessonID } = useParams()
+  const { lessonID, courseID } = useParams()
   const [questions, setQuistions] = useState()
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true)
@@ -18,7 +19,7 @@ function QuizAnswerContainer() {
         },
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response.data.lessonQuestions)
         setQuistions(response.data.lessonQuestions)
       })
       .catch((error) => console.log(error))
@@ -27,20 +28,21 @@ function QuizAnswerContainer() {
       })
   }, [])
 
-  if (loading) return <div>Loading ....</div>
+  if (loading || questions === undefined) return <div>Loading ....</div>
+  console.log(questions)
   return (
     <div className={`${styles.question_container}`}>
-      <button className={`${styles.add_btn}`}>Add Question</button>
+      <button
+        className={`${styles.add_btn}`}
+        onClick={() => navigate(`/addQuestion/${courseID}/${lessonID}`)}
+      >
+        Add Question
+      </button>
       {!questions?.length ? (
         <div>Empty</div>
       ) : (
         questions?.map((question, index) => (
-          <Question
-            type="answer"
-            question={question}
-            questionIndex={index}
-            key={question.questionId}
-          />
+          <Question question={question} questionIndex={index} key={question.id} />
         ))
       )}
     </div>

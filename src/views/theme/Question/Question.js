@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Question.module.css'
 
-function Question(question, questionIndex) {
+function Question({ question, questionIndex }) {
   return (
     <div className={`${styles.question_container}`}>
       <div className={`${styles.question}`}>
