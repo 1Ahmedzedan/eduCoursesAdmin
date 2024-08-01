@@ -120,6 +120,30 @@
   font-weight: 600;
 }
 
+.btns_container {
+  display: flex;
+  gap: 10px;
+  /* justify-content: flex-end; */
+}
+
+.delete_btn {
+  background: red;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding: 0px 20px;
+}
+
+.edit_btn {
+  background: green;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  padding: 0px 20px;
+}
+
 @media (width<=750px) {
   .explain_btn span {
     font-size: 24px;

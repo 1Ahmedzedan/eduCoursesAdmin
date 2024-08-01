@@ -7,6 +7,7 @@ function QuizAnswerContainer() {
   const { lessonID, courseID } = useParams()
   const [questions, setQuistions] = useState()
   const [loading, setLoading] = useState(false)
+  const [isDeleteQuestion, setIsDeleteQuestion] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,10 +27,9 @@ function QuizAnswerContainer() {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [isDeleteQuestion])
 
   if (loading || questions === undefined) return <div>Loading ....</div>
-  console.log(questions)
   return (
     <div className={`${styles.question_container}`}>
       <button
@@ -42,7 +42,12 @@ function QuizAnswerContainer() {
         <div>Empty</div>
       ) : (
         questions?.map((question, index) => (
-          <Question question={question} questionIndex={index} key={question.id} />
+          <Question
+            question={question}
+            questionIndex={index}
+            key={question.id}
+            setIsDeleteQuestion={setIsDeleteQuestion}
+          />
         ))
       )}
     </div>
