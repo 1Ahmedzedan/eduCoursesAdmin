@@ -18,10 +18,13 @@ import { useParams } from 'react-router-dom'
 function AddQuestion() {
   const { courseID, lessonID } = useParams()
   const [question, setQuestion] = useState('')
-  const [options, setOptions] = useState(['', '', '', ''])
+  const [option1, setOption1] = useState('')
+  const [option2, setOption2] = useState('')
+  const [option3, setOption3] = useState('')
+  const [option4, setOption4] = useState('')
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [explain, setExplain] = useState('')
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState('')
   const [preview, setPreview] = useState(null)
   const [isCreateQuestion, setIsCreateQuestion] = useState(false)
 
@@ -41,10 +44,10 @@ function AddQuestion() {
     e.preventDefault()
     if (
       question === '' ||
-      options[0] === '' ||
-      options[1] === '' ||
-      options[2] === '' ||
-      options[3] === '' ||
+      option1 === '' ||
+      option2 === '' ||
+      option3 === '' ||
+      option4 === '' ||
       explain === ''
     )
       return
@@ -53,7 +56,7 @@ function AddQuestion() {
       courseId: courseID,
       question: question,
       image: preview,
-      options: options,
+      options: [option1, option2, option3, option4],
       correctAnswer: correctAnswer,
       explanation: explain,
     }
@@ -74,10 +77,13 @@ function AddQuestion() {
       )
       .then(() => {
         setQuestion('')
-        setOptions(['', '', '', ''])
+        setOption1('')
+        setOption2('')
+        setOption3('')
+        setOption4('')
         setCorrectAnswer('')
         setExplain('')
-        setImage(null)
+        setImage('')
         setPreview(null)
       })
       .then((error) => {
@@ -90,9 +96,12 @@ function AddQuestion() {
 
   function handleSetOptions(idx, val) {
     const newOption = options
-    newOption[idx] = val
+    newOption[idx] = newOption[idx] + val
     setOptions(newOption)
+    console.log(options)
   }
+
+  // console.log(options[0])
 
   return (
     <CRow>
@@ -118,8 +127,8 @@ function AddQuestion() {
                   <CFormTextarea
                     id="option1"
                     placeholder="Option 1"
-                    value={options[0]}
-                    onChange={(e) => handleSetOptions(0, e.target.value)}
+                    value={option1}
+                    onChange={(e) => setOption1(e.target.value)}
                   ></CFormTextarea>
                 </div>
                 <div className="mb-3">
@@ -127,8 +136,8 @@ function AddQuestion() {
                   <CFormTextarea
                     id="option2"
                     placeholder="Option 2"
-                    value={options[1]}
-                    onChange={(e) => handleSetOptions(1, e.target.value)}
+                    value={option2}
+                    onChange={(e) => setOption2(e.target.value)}
                   ></CFormTextarea>
                 </div>
                 <div className="mb-3">
@@ -136,8 +145,8 @@ function AddQuestion() {
                   <CFormTextarea
                     id="option3"
                     placeholder="Option 3"
-                    value={options[2]}
-                    onChange={(e) => handleSetOptions(2, e.target.value)}
+                    value={option3}
+                    onChange={(e) => setOption3(e.target.value)}
                   ></CFormTextarea>
                 </div>
                 <div className="mb-3">
@@ -145,8 +154,8 @@ function AddQuestion() {
                   <CFormTextarea
                     id="option4"
                     placeholder="Option 4"
-                    value={options[3]}
-                    onChange={(e) => handleSetOptions(3, e.target.value)}
+                    value={option4}
+                    onChange={(e) => setOption4(e.target.value)}
                   ></CFormTextarea>
                 </div>
                 <div className="mb-3">
@@ -173,7 +182,6 @@ function AddQuestion() {
                     type="file"
                     id="exampleFormControlInput1"
                     placeholder="name of course"
-                    value={image}
                     accept="image/*"
                     onChange={handleImageChange}
                   />
