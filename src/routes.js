@@ -14,6 +14,7 @@ const AddPackage = React.lazy(() => import('./views/theme/AddPackage/AddPackage'
 const EditPackage = React.lazy(() => import('./views/theme/EditPackage/EditPackage'))
 const AddLesson = React.lazy(() => import('./views/theme/AddLesson/AddLesson'))
 const AddQuestion = React.lazy(() => import('./views/theme/AddQuestion/AddQuestion'))
+const EditQuestion = React.lazy(() => import('./views/theme/EditQuestion/EditQuestion'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
 // Base
@@ -77,6 +78,7 @@ const routes = [
   { path: '/editCourse/:courseID', name: 'addCourse', element: EditCourse },
   { path: '/addPackage', name: 'addCourse', element: AddPackage },
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
+  { path: '/editQuestion/:lessonID/:QuestionIdx', name: 'addCourse', element: EditQuestion },
   { path: '/addQuestion/:courseID/:lessonID', name: 'addCourse', element: AddQuestion },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

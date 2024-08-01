@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import styles from './Question.module.css'
 import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function Question({ question, questionIndex, setIsDeleteQuestion }) {
+  const { lessonID } = useParams()
   const [isDeleting, setIsDeleting] = useState(false)
+  const navigate = useNavigate()
   function handleDeleteQuestion() {
     const token = localStorage.getItem('token')
 
@@ -31,7 +34,12 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
         >
           Delete
         </button>
-        <button className={`${styles.edit_btn}`}>Edit</button>
+        <button
+          className={`${styles.edit_btn}`}
+          onClick={() => navigate(`/editQuestion/${lessonID}/${questionIndex}`)}
+        >
+          Edit
+        </button>
       </div>
       <div className={`${styles.question}`}>
         {questionIndex + 1}- {question?.question}
