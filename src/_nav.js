@@ -16,26 +16,26 @@ import {
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
-  {
-    component: CNavItem,
-    name: 'Login',
-    to: '/login',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-  {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
-    name: 'Theme',
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Login',
+  //   to: '/login',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW',
+  //   },
+  // },
+  // {
+  //   component: CNavItem,
+  //   name: 'Dashboard',
+  //   to: '/dashboard',
+  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  // },
+  // {
+  //   component: CNavTitle,
+  //   name: 'Theme',
+  // },
   {
     component: CNavItem,
     name: 'Courses',
@@ -51,8 +51,8 @@ const _nav = [
 
   {
     component: CNavItem,
-    name: 'Typography',
-    to: '/theme/typography',
+    name: 'Users',
+    to: '/users',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {

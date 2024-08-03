@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
+const Users = React.lazy(() => import('./views/theme/Users/Users'))
 const FinalExamAnswers = React.lazy(() => import('./views/theme/FinalExamAnswers/FinalExamAnswers'))
 const QuizAnswerContainer = React.lazy(
   () => import('./views/theme/QuizAnswerContainer/QuizAnswerContainer'),
@@ -88,7 +89,7 @@ const routes = [
   },
   { path: '/addQuestion/:courseID/:lessonID', name: 'addCourse', element: AddQuestion },
   { path: '/addQuestion/:courseID', name: 'addCourse', element: AddQuestion },
-  { path: '/theme/typography', name: 'Typography', element: Typography },
+  { path: '/users', name: 'users', element: Users },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },
