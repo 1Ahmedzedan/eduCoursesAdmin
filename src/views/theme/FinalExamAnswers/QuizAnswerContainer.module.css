@@ -1,0 +1,52 @@
+.question_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grade_container {
+  background-color: white;
+  box-shadow: 0px 0px 8px 2px rgb(0 0 0 / 20%);
+  width: fit-content;
+  padding: 10px 40px;
+  font-size: 22px;
+  font-weight: 600;
+  word-spacing: 10px;
+  border-radius: 15px;
+  align-self: flex-end;
+}
+
+.grade_container span {
+  color: grey;
+}
+
+.low_grade {
+  color: red !important;
+}
+
+.high_grade {
+  color: green !important;
+}
+
+.prefect_grade {
+  color: gold !important;
+}
+
+.add_btn {
+  background-color: #1b9e3e;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: fit-content;
+  padding: 5px 30px;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  align-self: flex-end;
+}
+
+@media (width <=750px) {
+  .question_container {
+    margin: 0 20px;
+  }
+}

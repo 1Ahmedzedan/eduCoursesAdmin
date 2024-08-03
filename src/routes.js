@@ -5,6 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
+const FinalExamAnswers = React.lazy(() => import('./views/theme/FinalExamAnswers/FinalExamAnswers'))
 const QuizAnswerContainer = React.lazy(
   () => import('./views/theme/QuizAnswerContainer/QuizAnswerContainer'),
 )
@@ -71,6 +72,7 @@ const routes = [
   { path: '/colors', name: 'Colors', element: Colors },
   { path: '/courses', name: 'Colors', element: Courses },
   { path: '/lessons/:courseID', name: 'Colors', element: Lessons },
+  { path: '/finalExam/:courseID', name: 'Colors', element: FinalExamAnswers },
   { path: '/lessonQuestion/:courseID/:lessonID', name: 'Colors', element: QuizAnswerContainer },
   { path: '/packages', name: 'Colors', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
@@ -79,7 +81,13 @@ const routes = [
   { path: '/addPackage', name: 'addCourse', element: AddPackage },
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
   { path: '/editQuestion/:lessonID/:QuestionIdx', name: 'addCourse', element: EditQuestion },
+  {
+    path: '/editQuestionFinalExam/:courseID/:QuestionIdx',
+    name: 'addCourse',
+    element: EditQuestion,
+  },
   { path: '/addQuestion/:courseID/:lessonID', name: 'addCourse', element: AddQuestion },
+  { path: '/addQuestion/:courseID', name: 'addCourse', element: AddQuestion },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },

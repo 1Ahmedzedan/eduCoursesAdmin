@@ -41,18 +41,21 @@ function AddQuestion() {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    console.log('submit')
+    setIsCreateQuestion(true)
     if (
       question === '' ||
       option1 === '' ||
       option2 === '' ||
       option3 === '' ||
       option4 === '' ||
-      explain === ''
+      (explain === '' && lessonID !== undefined)
     )
       return
+
+    e.preventDefault()
     const createdQuestion = {
-      lessonId: lessonID,
+      lessonId: lessonID === undefined ? '' : lessonID,
       courseId: courseID,
       question: question,
       image: preview,
@@ -63,18 +66,17 @@ function AddQuestion() {
 
     console.log(createdQuestion)
 
-    setIsCreateQuestion(true)
     const token = localStorage.getItem('token')
+    const url =
+      lessonID === undefined
+        ? `https://courses-website-q0gf.onrender.com/api/course/question?courseId=${courseID}`
+        : `https://courses-website-q0gf.onrender.com/api/lesson/question?lessonId=${lessonID}`
     axios
-      .post(
-        `https://courses-website-q0gf.onrender.com/api/lesson/question?lessonId=${lessonID}`,
-        createdQuestion,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .post(url, createdQuestion, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(() => {
         setQuestion('')
         setOption1('')
@@ -92,13 +94,6 @@ function AddQuestion() {
       .finally(() => {
         setIsCreateQuestion(false)
       })
-  }
-
-  function handleSetOptions(idx, val) {
-    const newOption = options
-    newOption[idx] = newOption[idx] + val
-    setOptions(newOption)
-    console.log(options)
   }
 
   // console.log(options[0])

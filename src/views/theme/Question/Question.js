@@ -4,22 +4,23 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Question({ question, questionIndex, setIsDeleteQuestion }) {
-  const { lessonID } = useParams()
+  const { lessonID, courseID } = useParams()
   const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()
   function handleDeleteQuestion() {
     const token = localStorage.getItem('token')
 
     setIsDeleting(true)
+    const url =
+      lessonID === undefined
+        ? `https://courses-website-q0gf.onrender.com/api/course/question?questionId=${question.id}`
+        : `https://courses-website-q0gf.onrender.com/api/lesson/question?questionId=${question.id}`
     axios
-      .delete(
-        `https://courses-website-q0gf.onrender.com/api/lesson/question?questionId=${question.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .delete(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(() => setIsDeleteQuestion((e) => !e))
       .catch((error) => console.log(error))
       .finally(() => setIsDeleting(false))
@@ -36,7 +37,11 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
         </button>
         <button
           className={`${styles.edit_btn}`}
-          onClick={() => navigate(`/editQuestion/${lessonID}/${questionIndex}`)}
+          onClick={() =>
+            lessonID === undefined
+              ? navigate(`/editQuestionFinalExam/${courseID}/${questionIndex}`)
+              : navigate(`/editQuestion/${lessonID}/${questionIndex}`)
+          }
         >
           Edit
         </button>

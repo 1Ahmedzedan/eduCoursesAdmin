@@ -16,7 +16,7 @@ import { useParams } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
 function EditQuestion() {
-  const { QuestionIdx, lessonID } = useParams()
+  const { QuestionIdx, lessonID, courseID } = useParams()
   const [data, setData] = useState(null)
   const [question, setQuestion] = useState('')
   const [option1, setOption1] = useState('')
@@ -50,7 +50,7 @@ function EditQuestion() {
       option2 === '' ||
       option3 === '' ||
       option4 === '' ||
-      explain === ''
+      (explain === '' && lessonID !== undefined)
     )
       return
     const createdQuestion = {
@@ -66,8 +66,12 @@ function EditQuestion() {
 
     setIsEditQuestion(true)
     const token = localStorage.getItem('token')
+    const url =
+      lessonID === undefined
+        ? `https://courses-website-q0gf.onrender.com/api/course/question`
+        : `https://courses-website-q0gf.onrender.com/api/lesson/question`
     axios
-      .put(`https://courses-website-q0gf.onrender.com/api/lesson/question`, createdQuestion, {
+      .put(url, createdQuestion, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -93,31 +97,58 @@ function EditQuestion() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    axios
-      .get(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response)
-        const q = response.data.lessonQuestions[QuestionIdx]
-        setData(response.data.lessonQuestions[QuestionIdx])
-        setQuestion(q.question)
-        setOption1(q.options[0])
-        setOption2(q.options[1])
-        setOption3(q.options[2])
-        setOption4(q.options[3])
-        setExplain(q.explanation)
-        setCorrectAnswer(q.correctAnswer)
-        setPreview(q.image)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
+    if (lessonID === undefined) {
+      axios
+        .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const q = response.data.finalQuiz[QuestionIdx]
+          setData(response.data.finalQuiz[QuestionIdx])
+          setQuestion(q.question)
+          setOption1(q.options[0])
+          setOption2(q.options[1])
+          setOption3(q.options[2])
+          setOption4(q.options[3])
+          setExplain(q.explanation)
+          setCorrectAnswer(q.correctAnswer)
+          setPreview(q.image)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    } else {
+      axios
+        .get(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response)
+          const q = response.data.lessonQuestions[QuestionIdx]
+          setData(response.data.lessonQuestions[QuestionIdx])
+          setQuestion(q.question)
+          setOption1(q.options[0])
+          setOption2(q.options[1])
+          setOption3(q.options[2])
+          setOption4(q.options[3])
+          setExplain(q.explanation)
+          setCorrectAnswer(q.correctAnswer)
+          setPreview(q.image)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
   }, [isEditQuestion])
 
   if (isLoading) return <div>Loading ...</div>

@@ -91,7 +91,7 @@ function Courses() {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 275,
+      width: 350,
       renderCell: (params) => {
         return (
           <div className="d-flex">
@@ -109,15 +109,19 @@ function Courses() {
             >
               Edite
             </p>
-            <p className="mb-0 me-3 fw-bold" style={{ cursor: 'pointer' }}>
-              View
+            <p
+              className="mb-0 me-3 fw-bold"
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate(`/lessons/${params.row.id}`)}
+            >
+              View Lesson
             </p>
             <p
               className="mb-0  fw-bold"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate(`/lessons/${params.row.id}`)}
+              onClick={() => navigate(`/finalExam/${params.row.id}`)}
             >
-              View Lessons
+              View Final Exam
             </p>
           </div>
         )
