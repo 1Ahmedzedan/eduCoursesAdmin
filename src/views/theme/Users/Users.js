@@ -22,7 +22,6 @@ function Users() {
           id: item.id,
           name: item.name,
           email: item.email,
-          phone: item.phone,
         }))
         setData(transformedData)
       })
@@ -56,7 +55,7 @@ function Users() {
             <p
               className="mb-0 me-3 fw-bold"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate(`/lessonQuestion/${courseID}/${params.row.id}`)}
+              onClick={() => navigate(`/userInfo/${params.row.id}`)}
             >
               View
             </p>

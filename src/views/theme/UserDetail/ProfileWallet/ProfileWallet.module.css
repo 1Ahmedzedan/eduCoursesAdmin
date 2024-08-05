@@ -1,0 +1,34 @@
+.profile_wallet_container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: rgba(0, 0, 0, 0.15) solid 2px;
+}
+
+.wallet_contant {
+  display: flex;
+  gap: 10px;
+}
+
+.wallet_contant span {
+  color: #ebbd6e;
+  font-size: 38px;
+}
+
+.wallet_contant p{
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.wallet_contant p span{
+  font-size: 26px;
+  color: grey;
+  font-weight: 500;
+  word-spacing: 20px;
+}

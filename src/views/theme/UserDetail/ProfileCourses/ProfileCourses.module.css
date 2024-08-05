@@ -1,0 +1,72 @@
+.profile_courses_container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: rgba(0, 0, 0, 0.15) solid 2px;
+}
+
+.empty_list {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.empty_list p {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.empty_list button {
+  width: 50%;
+  border-radius: 5px;
+  background: #5b2c6f;
+  padding: 10px 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  transition: all;
+  transition-duration: 500ms;
+}
+
+.empty_list button:hover {
+  background: #5b2c6fe5;
+}
+
+@media (width<=750px) {
+  .header {
+    font-size: 24px;
+  }
+
+  .profile_courses_container {
+    gap: 15px;
+    font-size: 16px;
+  }
+
+  .empty_list p {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .empty_list button {
+    font-size: 16px;
+  }
+}
+
+@media (width<=450px) {
+  .empty_list p {
+    font-size: 18px;
+  }
+
+  .empty_list button {
+    font-size: 14px;
+    width: 100%;
+  }
+}

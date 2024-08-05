@@ -1,0 +1,139 @@
+.quiz_table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.quiz_table tr:first-child {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: none !important;
+}
+
+.quiz_table tr:first-child td {
+  padding: 10px;
+}
+
+.quiz_table tr {
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+.quiz_table tr:first-child td {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.quiz_table tr td {
+  padding: 5px 10px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.quiz_table tr td:first-child {
+  width: calc(50% / 2);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.quiz_table tr td:last-child {
+  width: 30%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.grade_container {
+  word-spacing: 10px;
+}
+
+.grade_container span {
+  color: grey;
+}
+
+.control_btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.control_btns button {
+  padding: 3px 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.control_btns button:first-child {
+  background-color: #7d3c98;
+  color: white;
+}
+
+.control_btns button:first-child:hover {
+  background-color: #7c3c98e9;
+}
+
+.control_btns button:last-child {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.control_btns button:last-child:hover {
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.low_grade {
+  color: red !important;
+}
+
+.high_grade {
+  color: green !important;
+}
+
+.prefect_grade {
+  color: gold !important;
+}
+
+.empty_table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 26px;
+  color: red;
+  text-align: center;
+  word-spacing: 5px;
+}
+
+@media (width<=750px) {
+  .header {
+    font-size: 24px;
+  }
+
+  .profile_quizes_container {
+    gap: 15px;
+    font-size: 16px;
+  }
+
+  .quiz_table tr td {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .quiz_table tr:first-child td {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+  }
+
+  .quiz_table tr td:last-child {
+    width: 40% !important;
+  }
+
+  .quiz_table tr td:first-child {
+    width: calc(60% / 2) !important;
+  }
+
+  .grade_container {
+    word-spacing: 5px;
+  }
+
+  .empty_table {
+    font-size: 20px;
+  }
+}

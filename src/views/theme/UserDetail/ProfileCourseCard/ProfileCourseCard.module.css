@@ -1,0 +1,34 @@
+.CourseCard_container {
+  background-color: #fff;
+  box-shadow: 7px 7px 12px #aaaaaa;
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+
+.CourseCard_container .img_container img {
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 140px;
+  width: 100%;
+  height: 100%;
+}
+
+.CourseCard_container .btn_container a {
+  background-color: #c463ec;
+  padding: 7px 12px;
+  border-radius: 7px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  transition: all;
+  transition-duration: 500ms;
+}
+
+.CourseCard_container .btn_container div {
+  color: white;
+}
+
+.CourseCard_container .btn_container a:hover {
+  background-color: #c563ece9;
+}
+

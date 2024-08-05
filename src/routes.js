@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { Children } from 'react'
 import Packages from './views/theme/Packages/Packages'
-
+import ProfileInfo from './views/theme/UserDetail/ProfileInfo/ProfileInfo'
+import ProfileCourses from './views/theme/UserDetail/ProfileCourses/ProfileCourses'
+const ProfileContainer = React.lazy(
+  () => import('./views/theme/UserDetail/ProfileContainer/ProfileContainer'),
+)
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
@@ -90,6 +94,8 @@ const routes = [
   { path: '/addQuestion/:courseID/:lessonID', name: 'addCourse', element: AddQuestion },
   { path: '/addQuestion/:courseID', name: 'addCourse', element: AddQuestion },
   { path: '/users', name: 'users', element: Users },
+  { path: '/userInfo/:userID', name: 'users', element: ProfileInfo },
+  { path: '/userCourses/:userID', name: 'userCourses', element: ProfileCourses },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },
