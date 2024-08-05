@@ -1,16 +1,30 @@
-import React from 'react'
-import { useGetUser } from '../../hooks/Auth/useGetUser'
-import { useGetAttendedExams } from '../../hooks/profile/useGetAttendedExams'
-import Loader from '../Loader/Loader'
+import React, { useEffect, useState } from 'react'
 import styles from './FinalExamsTable.module.css'
 import TableRow from './TableRow'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function FinalExamsTable() {
-  const { user } = useGetUser()
-  const { attendedExams, isLoading } = useGetAttendedExams(user.id, 'finalExams')
+  const { userID } = useParams()
+  const [attendedExams, setAttendedExams] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(true)
 
-  if (isLoading) return <Loader type="mini" />
-
+  useEffect(() => {
+    axios
+      .get(`https://courses-website-q0gf.onrender.com/api/courses/info?userId=${userID}`)
+      .then((response) => {
+        setAttendedExams(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [])
+  if (isLoading) return <div>Loading ...</div>
+  if (attendedExams === undefined) return null
+  console.log(attendedExams)
   if (attendedExams.length === 0) {
     return <div className={`${styles.empty_table}`}>Not Exist Attended Final Exam</div>
   }

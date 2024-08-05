@@ -2,6 +2,7 @@ import React, { Children } from 'react'
 import Packages from './views/theme/Packages/Packages'
 import ProfileInfo from './views/theme/UserDetail/ProfileInfo/ProfileInfo'
 import ProfileCourses from './views/theme/UserDetail/ProfileCourses/ProfileCourses'
+import ProfileFinalExamContainer from './views/theme/UserDetail/ProfileFinalExamContainer/ProfileFinalExamContainer'
 const ProfileContainer = React.lazy(
   () => import('./views/theme/UserDetail/ProfileContainer/ProfileContainer'),
 )
@@ -96,6 +97,11 @@ const routes = [
   { path: '/users', name: 'users', element: Users },
   { path: '/userInfo/:userID', name: 'users', element: ProfileInfo },
   { path: '/userCourses/:userID', name: 'userCourses', element: ProfileCourses },
+  {
+    path: '/userAttendedFinalExams/:userID',
+    name: 'userCourses',
+    element: ProfileFinalExamContainer,
+  },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', element: Breadcrumbs },

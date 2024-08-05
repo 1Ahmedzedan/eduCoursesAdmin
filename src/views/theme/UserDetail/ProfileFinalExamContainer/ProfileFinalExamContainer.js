@@ -6,7 +6,7 @@ function ProfileFinalExamContainer() {
   return (
     <div className={`${styles.profile_quizes_container}`}>
       <div className={`${styles.header}`}>
-        <p>Enrolled Quizes</p>
+        <p>Enrolled Final Exams</p>
       </div>
 
       <div className={`${styles.btns}`}>
