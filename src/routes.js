@@ -76,11 +76,11 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-  { path: '/courses', name: 'Colors', element: Courses },
+  { path: '/courses', name: 'Courses', element: Courses },
   { path: '/lessons/:courseID', name: 'Colors', element: Lessons },
   { path: '/finalExam/:courseID', name: 'Colors', element: FinalExamAnswers },
   { path: '/lessonQuestion/:courseID/:lessonID', name: 'Colors', element: QuizAnswerContainer },
-  { path: '/packages', name: 'Colors', element: Packages },
+  { path: '/packages', name: 'Packages', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
   { path: '/addLesson/:courseID', name: 'addCourse', element: AddLesson },
   { path: '/editCourse/:courseID', name: 'addCourse', element: EditCourse },
@@ -94,7 +94,7 @@ const routes = [
   },
   { path: '/addQuestion/:courseID/:lessonID', name: 'addCourse', element: AddQuestion },
   { path: '/addQuestion/:courseID', name: 'addCourse', element: AddQuestion },
-  { path: '/users', name: 'users', element: Users },
+  { path: '/users', name: 'Users', element: Users },
   { path: '/userInfo/:userID', name: 'users', element: ProfileInfo },
   { path: '/userCourses/:userID', name: 'userCourses', element: ProfileCourses },
   {
@@ -110,7 +110,7 @@ const routes = [
 
   {
     path: '/pages',
-    name: 'pages',
+    name: 'Pages',
     element: Pages,
   },
 ]
