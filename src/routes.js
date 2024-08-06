@@ -3,6 +3,7 @@ import Packages from './views/theme/Packages/Packages'
 import ProfileInfo from './views/theme/UserDetail/ProfileInfo/ProfileInfo'
 import ProfileCourses from './views/theme/UserDetail/ProfileCourses/ProfileCourses'
 import ProfileFinalExamContainer from './views/theme/UserDetail/ProfileFinalExamContainer/ProfileFinalExamContainer'
+import ProfileQuizesContainer from './views/theme/UserDetail/ProfileQuizesContainer/ProfileQuizesContainer'
 const ProfileContainer = React.lazy(
   () => import('./views/theme/UserDetail/ProfileContainer/ProfileContainer'),
 )
@@ -99,8 +100,13 @@ const routes = [
   { path: '/userCourses/:userID', name: 'userCourses', element: ProfileCourses },
   {
     path: '/userAttendedFinalExams/:userID',
-    name: 'userCourses',
+    name: 'userFinalExams',
     element: ProfileFinalExamContainer,
+  },
+  {
+    path: '/userAttendedQuizes/:userID',
+    name: 'userQuizes',
+    element: ProfileQuizesContainer,
   },
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },

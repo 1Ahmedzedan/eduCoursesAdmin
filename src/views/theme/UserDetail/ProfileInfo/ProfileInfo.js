@@ -61,7 +61,7 @@ function ProfileInfo() {
           <p> Attended Exams</p>
           <Link to={`/userAttendedFinalExams/${userID}`}>View</Link>
           <p> Attended Quizes</p>
-          <Link>View</Link>
+          <Link to={`/userAttendedQuizes/${userID}`}>View</Link>
         </div>
       </div>
     </div>
