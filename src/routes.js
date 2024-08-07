@@ -7,6 +7,7 @@ import ProfileQuizesContainer from './views/theme/UserDetail/ProfileQuizesContai
 import { element } from 'prop-types'
 import Pages from './views/theme/Pages/Pages'
 import AboutPageForm from './views/theme/AboutPageForm/AboutPageForm'
+import TermsPageForm from './views/theme/TermsPageForm/TermsPageForm'
 const ProfileContainer = React.lazy(
   () => import('./views/theme/UserDetail/ProfileContainer/ProfileContainer'),
 )
@@ -118,6 +119,11 @@ const routes = [
     path: '/AboutPage',
     name: 'AboutPage',
     element: AboutPageForm,
+  },
+  {
+    path: '/TermsPage',
+    name: 'TermsPage',
+    element: TermsPageForm,
   },
 ]
 
