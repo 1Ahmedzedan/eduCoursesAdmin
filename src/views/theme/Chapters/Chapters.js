@@ -18,7 +18,7 @@ function Chapters() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${id}`, {
+      .delete(`https://courses-website-q0gf.onrender.com/api/chapter/${id}?chapterId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
