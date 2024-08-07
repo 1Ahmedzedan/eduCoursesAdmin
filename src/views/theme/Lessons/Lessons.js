@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Lessons() {
-  const { courseID } = useParams()
+  const { chapterID } = useParams()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -18,11 +18,14 @@ function Lessons() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .delete(
+        `https://courses-website-q0gf.onrender.com/api/chapter/${chapterID}/lessons?chapterId=${chapterID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
         const data = response.data
       })
@@ -37,13 +40,16 @@ function Lessons() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .get(
+        `https://courses-website-q0gf.onrender.com/api/chapter/${chapterID}/lessons?chapterId=${chapterID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
-        const transformedData = response.data.lessonsPref.map((item) => ({
+        const transformedData = response.data.map((item) => ({
           id: item.id,
           name: item.name,
         }))

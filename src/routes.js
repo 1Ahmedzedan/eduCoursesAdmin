@@ -83,7 +83,7 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/courses', name: 'Courses', element: Courses },
   { path: '/chapters/:courseID', name: 'Chapters', element: Chapters },
-  { path: '/lessons/:courseID', name: 'Lessons', element: Lessons },
+  { path: '/lessons/:chapterID', name: 'Lessons', element: Lessons },
   { path: '/finalExam/:courseID', name: 'finalExam', element: FinalExamAnswers },
   { path: '/lessonQuestion/:courseID/:lessonID', name: 'Colors', element: QuizAnswerContainer },
   { path: '/packages', name: 'Packages', element: Packages },
