@@ -103,7 +103,7 @@ function Chapters() {
       <div className="d-flex justify-content-end mb-4">
         <button
           className="bg-success border-0 btn px-4 py-2 text-white fw-bold"
-          onClick={() => navigate(`/addLesson/${courseID}`)}
+          onClick={() => navigate(`/addChapter/${courseID}`)}
         >
           Add Chapter
         </button>
