@@ -32,7 +32,7 @@ function Pages() {
             <p
               className="mb-0 me-3 fw-bold"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate(`/lessonQuestion/${courseID}/${params.row.id}`)}
+              onClick={() => navigate(`/${data[params.id - 1].PageName}Page`)}
             >
               Edit
             </p>
