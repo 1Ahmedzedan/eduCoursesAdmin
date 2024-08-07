@@ -12,21 +12,26 @@ import {
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
+// import { DocsExample } from 'src/components'
 
-function TermsPageForm() {
+function ContactPageForm() {
   const [isSubmited, setIsSubmited] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [content, setContent] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [fullPage, setFullPage] = useState()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const page = {
       ...fullPage,
-      terms: content,
+      contact: {
+        phone: phone,
+        email: email,
+      },
     }
 
-    console.log(page)
     setIsSubmited(true)
     const token = localStorage.getItem('token')
     axios
@@ -39,9 +44,7 @@ function TermsPageForm() {
           },
         },
       )
-      .then((response) => {
-        console.log(response)
-      })
+      .then(() => {})
       .then((error) => {
         console.log(error)
       })
@@ -59,9 +62,9 @@ function TermsPageForm() {
         },
       })
       .then((response) => {
-        console.log(response.data[0])
         setFullPage(response.data[0])
-        setContent(response.data[0].terms)
+        setPhone(response.data[0].contact.phone)
+        setEmail(response.data[0].contact.email)
       })
       .catch((error) => {
         console.log(error.response.data)
@@ -78,19 +81,31 @@ function TermsPageForm() {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Terms Page</strong>
+            <strong>Contact Page</strong>
           </CCardHeader>
           <CCardBody>
             <CForm>
               <div className="mb-3">
-                <CFormLabel htmlFor="exampleFormControlInput2">Content of Terms Page</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="exampleFormControlInput2"
-                  placeholder="content of terms page"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                />
+                <div className="mb-3">
+                  <CFormLabel htmlFor="exampleFormControlInput2">Phone</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput2"
+                    placeholder="Enter Phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <CFormLabel htmlFor="exampleFormControlInput2">Email</CFormLabel>
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput2"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
                 <div className="col-auto text-center">
                   <CButton
                     color="primary"
@@ -111,4 +126,4 @@ function TermsPageForm() {
   )
 }
 
-export default TermsPageForm
+export default ContactPageForm
