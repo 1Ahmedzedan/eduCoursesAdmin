@@ -88,7 +88,7 @@ function Chapters() {
             <p
               className="mb-0 me-3 fw-bold"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate(`/lessons/${params.row.id}`)}
+              onClick={() => navigate(`/lessons/${courseID}/${params.row.id}`)}
             >
               View Lessons
             </p>

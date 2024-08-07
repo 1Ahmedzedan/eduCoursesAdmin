@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Lessons() {
-  const { chapterID } = useParams()
+  const { courseID, chapterID } = useParams()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -106,7 +106,7 @@ function Lessons() {
       <div className="d-flex justify-content-end mb-4">
         <button
           className="bg-success border-0 btn px-4 py-2 text-white fw-bold"
-          onClick={() => navigate(`/addLesson/${courseID}`)}
+          onClick={() => navigate(`/addLesson/${courseID}/${chapterID}`)}
         >
           Add Lesson
         </button>

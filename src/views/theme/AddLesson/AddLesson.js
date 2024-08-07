@@ -16,7 +16,7 @@ import { useParams } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
 function AddLesson() {
-  const { courseID } = useParams()
+  const { courseID, chapterID } = useParams()
   const [name, setName] = useState('')
   const [isCreateLesson, setIsCreateLesson] = useState(false)
 
@@ -27,16 +27,18 @@ function AddLesson() {
       courseId: courseID,
     }
 
-    console.log(lesson)
-
     setIsCreateLesson(true)
     const token = localStorage.getItem('token')
     axios
-      .post(`https://courses-website-q0gf.onrender.com/api/lesson?courseId=${courseID}`, lesson, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .post(
+        `https://courses-website-q0gf.onrender.com/api/lesson?courseId=${courseID}&chapterId=${chapterID}`,
+        lesson,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then(() => {
         setName('')
       })
