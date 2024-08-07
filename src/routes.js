@@ -9,6 +9,7 @@ import Pages from './views/theme/Pages/Pages'
 import AboutPageForm from './views/theme/AboutPageForm/AboutPageForm'
 import TermsPageForm from './views/theme/TermsPageForm/TermsPageForm'
 import ContactPageForm from './views/theme/ContactPageForm/ContactPageForm'
+import Chapters from './views/theme/Chapters/Chapters'
 const ProfileContainer = React.lazy(
   () => import('./views/theme/UserDetail/ProfileContainer/ProfileContainer'),
 )
@@ -80,8 +81,9 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/courses', name: 'Courses', element: Courses },
-  { path: '/lessons/:courseID', name: 'Colors', element: Lessons },
-  { path: '/finalExam/:courseID', name: 'Colors', element: FinalExamAnswers },
+  { path: '/chapters/:courseID', name: 'Chapters', element: Chapters },
+  { path: '/lessons/:courseID', name: 'Lessons', element: Lessons },
+  { path: '/finalExam/:courseID', name: 'finalExam', element: FinalExamAnswers },
   { path: '/lessonQuestion/:courseID/:lessonID', name: 'Colors', element: QuizAnswerContainer },
   { path: '/packages', name: 'Packages', element: Packages },
   { path: '/addCourse', name: 'addCourse', element: AddCourse },
