@@ -58,6 +58,9 @@ function AddCourse() {
       .then((error) => {
         console.log(error)
       })
+      .finally(() => {
+        setIsCreateCourse(false)
+      })
   }
   return (
     <CRow>
@@ -74,7 +77,7 @@ function AddCourse() {
                   type="text"
                   id="exampleFormControlInput2"
                   placeholder="name of course"
-                  defaultValue={name}
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
