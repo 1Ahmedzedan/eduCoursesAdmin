@@ -6,6 +6,7 @@ import {
   CCardHeader,
   CCol,
   CForm,
+  CFormCheck,
   CFormInput,
   CFormLabel,
   CFormTextarea,
@@ -27,6 +28,8 @@ function EditQuestion() {
   const [explain, setExplain] = useState('')
   const [image, setImage] = useState('')
   const [preview, setPreview] = useState(null)
+  const [level, setLevel] = useState('easy')
+  const [free, setFree] = useState(false)
   const [isEditQuestion, setIsEditQuestion] = useState(false)
   const [isLoading, setLoading] = useState(false)
 
@@ -54,12 +57,16 @@ function EditQuestion() {
     )
       return
     const createdQuestion = {
-      ...data,
+      id: data.id,
+      lessonId: lessonID === undefined ? '' : lessonID,
+      courseId: data.courseId,
       question: question,
       image: preview,
       options: [option1, option2, option3, option4],
       correctAnswer: correctAnswer,
       explanation: explain,
+      free: free,
+      level: level,
     }
 
     console.log(createdQuestion)
@@ -124,13 +131,15 @@ function EditQuestion() {
         })
     } else {
       axios
-        .get(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        .get(
+          `https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}&level=${level}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        })
+        )
         .then((response) => {
-          console.log(response)
           const q = response.data.lessonQuestions[QuestionIdx]
           setData(response.data.lessonQuestions[QuestionIdx])
           setQuestion(q.question)
@@ -141,6 +150,8 @@ function EditQuestion() {
           setExplain(q.explanation)
           setCorrectAnswer(q.correctAnswer)
           setPreview(q.image)
+          setLevel(q.level)
+          setFree(q.free)
         })
         .catch((error) => {
           console.log(error)
@@ -246,6 +257,50 @@ function EditQuestion() {
                       }}
                     />
                   )}
+                </div>
+                <div>
+                  <p>Question level : </p>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="easy"
+                      value="easy"
+                      checked={level === 'easy'}
+                      onChange={() => setLevel('easy')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="easy">Easy</CFormLabel>
+                  </div>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="medium"
+                      value="medium"
+                      checked={level === 'medium'}
+                      onChange={() => setLevel('medium')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="medium">Medium</CFormLabel>
+                  </div>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="hard"
+                      value="hard"
+                      checked={level === 'hard'}
+                      onChange={() => setLevel('hard')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="hard">Hard</CFormLabel>
+                  </div>
+                </div>
+                <div className="d-flex gap-3">
+                  <CFormCheck
+                    id="free?"
+                    checked={free}
+                    onChange={() => setFree((e) => !e)}
+                  ></CFormCheck>
+                  <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
                 </div>
                 <div className="col-auto text-center">
                   <CButton

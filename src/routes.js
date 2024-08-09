@@ -44,7 +44,7 @@ const routes = [
   { path: '/editCourse/:courseID', name: 'addCourse', element: EditCourse },
   { path: '/addPackage', name: 'addCourse', element: AddPackage },
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
-  { path: '/editQuestion/:lessonID/:QuestionIdx', name: 'addCourse', element: EditQuestion },
+  { path: '/editQuestion/:lessonID/:QuestionIdx/:level', name: 'addCourse', element: EditQuestion },
   {
     path: '/editQuestionFinalExam/:courseID/:QuestionIdx',
     name: 'addCourse',

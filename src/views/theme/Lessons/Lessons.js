@@ -96,7 +96,7 @@ function Lessons() {
                   style={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/lessonQuestion/${courseID}/${params.row.id}`)}
                 >
-                  View
+                  View Quiz
                 </p>
               </Modal.Open>
               <Modal.Window>
@@ -117,13 +117,13 @@ function Lessons() {
                     <div className={styles.level_input}>
                       <input
                         type="radio"
-                        value="meduim"
-                        id="meduim"
+                        value="medium"
+                        id="medium"
                         name="level"
-                        checked={level === 'meduim'}
+                        checked={level === 'medium'}
                         onChange={(e) => setLevel(e.target.value)}
                       />
-                      <label htmlFor="meduim">Meduim</label>
+                      <label htmlFor="medium">Medium</label>
                     </div>
                     <div className={styles.level_input}>
                       <input

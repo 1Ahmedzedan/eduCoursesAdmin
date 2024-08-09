@@ -216,12 +216,12 @@ function AddQuestion() {
                     <CFormCheck
                       type="radio"
                       name="level"
-                      id="meduim"
-                      value="meduim"
-                      checked={level === 'meduim'}
-                      onChange={() => setLevel('meduim')}
+                      id="medium"
+                      value="medium"
+                      checked={level === 'medium'}
+                      onChange={() => setLevel('medium')}
                     ></CFormCheck>
-                    <CFormLabel htmlFor="meduim">Meduim</CFormLabel>
+                    <CFormLabel htmlFor="medium">Medium</CFormLabel>
                   </div>
                   <div className="d-flex gap-3">
                     <CFormCheck

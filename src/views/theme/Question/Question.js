@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Question({ question, questionIndex, setIsDeleteQuestion }) {
-  const { lessonID, courseID } = useParams()
+  const { lessonID, courseID, level } = useParams()
   const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()
   function handleDeleteQuestion() {
@@ -40,7 +40,7 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
           onClick={() =>
             lessonID === undefined
               ? navigate(`/editQuestionFinalExam/${courseID}/${questionIndex}`)
-              : navigate(`/editQuestion/${lessonID}/${questionIndex}`)
+              : navigate(`/editQuestion/${lessonID}/${questionIndex}/${level}`)
           }
         >
           Edit
