@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import styles from './Lessons.module.css'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import Modal from '../../Modal/Modal'
 
 function Lessons() {
   const { courseID, chapterID } = useParams()
@@ -9,6 +11,7 @@ function Lessons() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [level, setLevel] = useState('easy')
 
   const navigate = useNavigate()
 
@@ -86,13 +89,73 @@ function Lessons() {
               Delete
             </p>
 
-            <p
+            <Modal>
+              <Modal.Open>
+                <p
+                  className="mb-0 me-3 fw-bold"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => navigate(`/lessonQuestion/${courseID}/${params.row.id}`)}
+                >
+                  View
+                </p>
+              </Modal.Open>
+              <Modal.Window>
+                <div className={styles.modal_container}>
+                  <div className={styles.level_form}>
+                    <p>Select Quiz Level :</p>
+                    <div className={styles.level_input}>
+                      <input
+                        type="radio"
+                        value="easy"
+                        id="easy"
+                        name="level"
+                        checked={level === 'easy'}
+                        onChange={(e) => setLevel(e.target.value)}
+                      />
+                      <label htmlFor="easy">Easy</label>
+                    </div>
+                    <div className={styles.level_input}>
+                      <input
+                        type="radio"
+                        value="meduim"
+                        id="meduim"
+                        name="level"
+                        checked={level === 'meduim'}
+                        onChange={(e) => setLevel(e.target.value)}
+                      />
+                      <label htmlFor="meduim">Meduim</label>
+                    </div>
+                    <div className={styles.level_input}>
+                      <input
+                        type="radio"
+                        value="hard"
+                        id="hard"
+                        name="level"
+                        checked={level === 'hard'}
+                        onChange={(e) => setLevel(e.target.value)}
+                      />
+                      <label htmlFor="hard">Hard</label>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() =>
+                      navigate(`/lessonQuestion/${courseID}/${params.row.id}/${level}`)
+                    }
+                    className={`${styles.quiz_btn}`}
+                  >
+                    View Quiz
+                  </button>
+                </div>
+              </Modal.Window>
+            </Modal>
+
+            {/* <p
               className="mb-0 me-3 fw-bold"
               style={{ cursor: 'pointer' }}
               onClick={() => navigate(`/lessonQuestion/${courseID}/${params.row.id}`)}
             >
               View
-            </p>
+            </p> */}
           </div>
         )
       },

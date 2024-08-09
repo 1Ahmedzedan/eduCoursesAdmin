@@ -4,7 +4,7 @@ import styles from './QuizAnswerContainer.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 function QuizAnswerContainer() {
-  const { lessonID, courseID } = useParams()
+  const { lessonID, courseID, level } = useParams()
   const [questions, setQuistions] = useState()
   const [loading, setLoading] = useState(false)
   const [isDeleteQuestion, setIsDeleteQuestion] = useState(false)
@@ -14,14 +14,16 @@ function QuizAnswerContainer() {
     setLoading(true)
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .get(
+        `https://courses-website-q0gf.onrender.com/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
-        // console.log(response.data.lessonQuestions)
-        setQuistions(response.data.lessonQuestions)
+        setQuistions(response.data)
       })
       .catch((error) => console.log(error))
       .finally(() => {
