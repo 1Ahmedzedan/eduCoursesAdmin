@@ -6,6 +6,8 @@ import {
   CCardHeader,
   CCol,
   CForm,
+  CFormCheck,
+  CFormControlWrapper,
   CFormInput,
   CFormLabel,
   CFormTextarea,
@@ -25,6 +27,8 @@ function AddQuestion() {
   const [correctAnswer, setCorrectAnswer] = useState('')
   const [explain, setExplain] = useState('')
   const [image, setImage] = useState('')
+  const [level, setLevel] = useState('easy')
+  const [free, setFree] = useState(false)
   const [preview, setPreview] = useState(null)
   const [isCreateQuestion, setIsCreateQuestion] = useState(false)
 
@@ -62,6 +66,8 @@ function AddQuestion() {
       options: [option1, option2, option3, option4],
       correctAnswer: correctAnswer,
       explanation: explain,
+      free: free,
+      level: level,
     }
 
     console.log(createdQuestion)
@@ -193,17 +199,61 @@ function AddQuestion() {
                     />
                   )}
                 </div>
-                <div className="col-auto text-center">
-                  <CButton
-                    color="primary"
-                    type="submit"
-                    className="mb-3 w-25"
-                    onClick={handleSubmit}
-                    disabled={isCreateQuestion}
-                  >
-                    {isCreateQuestion ? 'Loading...' : 'Add Question'}
-                  </CButton>
+                <div>
+                  <p>Question level : </p>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="easy"
+                      value="easy"
+                      checked={level === 'easy'}
+                      onChange={() => setLevel('easy')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="easy">Easy</CFormLabel>
+                  </div>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="meduim"
+                      value="meduim"
+                      checked={level === 'meduim'}
+                      onChange={() => setLevel('meduim')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="meduim">Meduim</CFormLabel>
+                  </div>
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      type="radio"
+                      name="level"
+                      id="hard"
+                      value="hard"
+                      checked={level === 'hard'}
+                      onChange={() => setLevel('hard')}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="hard">Hard</CFormLabel>
+                  </div>
                 </div>
+                <div className="d-flex gap-3">
+                  <CFormCheck
+                    id="free?"
+                    checked={free}
+                    onChange={() => setFree((e) => !e)}
+                  ></CFormCheck>
+                  <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
+                </div>
+              </div>
+              <div className="col-auto text-center">
+                <CButton
+                  color="primary"
+                  type="submit"
+                  className="mb-3 w-25"
+                  onClick={handleSubmit}
+                  disabled={isCreateQuestion}
+                >
+                  {isCreateQuestion ? 'Loading...' : 'Add Question'}
+                </CButton>
               </div>
             </CForm>
           </CCardBody>
