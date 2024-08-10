@@ -36,7 +36,7 @@ function ContactPageForm() {
     const token = localStorage.getItem('token')
     axios
       .put(
-        `https://courses-website-q0gf.onrender.com/api/pages/66b2c11ef617384faf5c9cfb?id=66b2c11ef617384faf5c9cfb`,
+        `https://courses-website-q0gf.onrender.com/api/pages/66b74a640606c930e3954a59?id=66b74a640606c930e3954a59`,
         page,
         {
           headers: {
