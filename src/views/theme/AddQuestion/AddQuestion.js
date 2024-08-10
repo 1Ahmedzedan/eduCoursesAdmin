@@ -29,6 +29,7 @@ function AddQuestion() {
   const [image, setImage] = useState('')
   const [level, setLevel] = useState('easy')
   const [free, setFree] = useState(false)
+  const [calc, setCalc] = useState(false)
   const [preview, setPreview] = useState(null)
   const [isCreateQuestion, setIsCreateQuestion] = useState(false)
 
@@ -68,9 +69,8 @@ function AddQuestion() {
       explanation: explain,
       free: free,
       level: level,
+      calc: calc,
     }
-
-    console.log(createdQuestion)
 
     const token = localStorage.getItem('token')
     const url =
@@ -93,6 +93,9 @@ function AddQuestion() {
         setExplain('')
         setImage('')
         setPreview(null)
+        setFree(false)
+        setLevel('easy')
+        setCalc(false)
       })
       .then((error) => {
         console.log(error)
@@ -234,6 +237,14 @@ function AddQuestion() {
                     ></CFormCheck>
                     <CFormLabel htmlFor="hard">Hard</CFormLabel>
                   </div>
+                </div>
+                <div className="d-flex gap-3">
+                  <CFormCheck
+                    id="calc?"
+                    checked={calc}
+                    onChange={() => setCalc((e) => !e)}
+                  ></CFormCheck>
+                  <CFormLabel htmlFor="calc?">Student can use calculator?</CFormLabel>
                 </div>
                 <div className="d-flex gap-3">
                   <CFormCheck
