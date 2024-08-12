@@ -23,6 +23,7 @@ function EditCourse() {
   const [description, setDescription] = useState('')
   const [course, setCourse] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
+  const [timer, setTimer] = useState(0)
   const [isGetCourse, setIsGetCourse] = useState(false)
 
   const handleImageChange = (e) => {
@@ -46,6 +47,7 @@ function EditCourse() {
       name: name,
       image: preview,
       description: description,
+      timer: timer,
     }
 
     setIsEditing(true)
@@ -86,6 +88,7 @@ function EditCourse() {
         setName(course.name)
         setPreview(course.image)
         setDescription(course.description)
+        setTimer(course.timer)
       })
       .catch((error) => {
         console.log(error.response.data)
@@ -149,6 +152,16 @@ function EditCourse() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></CFormTextarea>
+              </div>
+              <div className="mb-3">
+                <CFormLabel htmlFor="timer">Time by minutes for final exam</CFormLabel>
+                <CFormInput
+                  type="number"
+                  id="timer"
+                  min={0}
+                  value={timer}
+                  onChange={(e) => setTimer(e.target.value)}
+                ></CFormInput>
               </div>
               <div className="col-auto text-center">
                 <CButton
