@@ -44,6 +44,7 @@ function Courses() {
           lessonsPrefLength: item.lessonsPref.length, // Adjust this key to match your data
           finalQuizLength: 1, // Adjust this key to match your data
         }))
+        console.log(response)
         setData(transformedData)
       })
       .catch((error) => {

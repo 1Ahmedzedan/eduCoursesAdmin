@@ -39,6 +39,7 @@ function AddCourse() {
       name: name,
       image: preview,
       description: description,
+      timer: 60,
     }
 
     setIsCreateCourse(true)

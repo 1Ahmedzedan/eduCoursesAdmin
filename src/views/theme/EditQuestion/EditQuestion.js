@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
 function EditQuestion() {
-  const { QuestionIdx, lessonID, courseID } = useParams()
+  const { QuestionIdx, lessonID, courseID, level: levelPram } = useParams()
   const [data, setData] = useState(null)
   const [question, setQuestion] = useState('')
   const [option1, setOption1] = useState('')
@@ -30,6 +30,7 @@ function EditQuestion() {
   const [preview, setPreview] = useState(null)
   const [level, setLevel] = useState('easy')
   const [free, setFree] = useState(false)
+  const [calc, setCalc] = useState(false)
   const [isEditQuestion, setIsEditQuestion] = useState(false)
   const [isLoading, setLoading] = useState(false)
 
@@ -67,6 +68,7 @@ function EditQuestion() {
       explanation: explain,
       free: free,
       level: level,
+      calc: calc,
     }
 
     console.log(createdQuestion)
@@ -93,6 +95,7 @@ function EditQuestion() {
         setExplain('')
         setImage('')
         setPreview(null)
+        setCalc(false)
       })
       .then((error) => {
         console.log(error)
@@ -114,6 +117,7 @@ function EditQuestion() {
         .then((response) => {
           const q = response.data.finalQuiz[QuestionIdx]
           setData(response.data.finalQuiz[QuestionIdx])
+          console.log(q)
           setQuestion(q.question)
           setOption1(q.options[0])
           setOption2(q.options[1])
@@ -124,7 +128,7 @@ function EditQuestion() {
           setPreview(q.image)
         })
         .catch((error) => {
-          console.log(error)
+          console.log('error')
         })
         .finally(() => {
           setLoading(false)
@@ -132,7 +136,7 @@ function EditQuestion() {
     } else {
       axios
         .get(
-          `https://courses-website-q0gf.onrender.com/api/lesson?lessonId=${lessonID}&level=${level}`,
+          `https://courses-website-q0gf.onrender.com/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -140,8 +144,12 @@ function EditQuestion() {
           },
         )
         .then((response) => {
-          const q = response.data.lessonQuestions[QuestionIdx]
-          setData(response.data.lessonQuestions[QuestionIdx])
+          const q = response.data[QuestionIdx]
+          console.log(response)
+          console.log(
+            `https://courses-website-q0gf.onrender.com/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
+          )
+          setData(response.data[QuestionIdx])
           setQuestion(q.question)
           setOption1(q.options[0])
           setOption2(q.options[1])
@@ -152,6 +160,7 @@ function EditQuestion() {
           setPreview(q.image)
           setLevel(q.level)
           setFree(q.free)
+          setCalc(q.calc)
         })
         .catch((error) => {
           console.log(error)
@@ -293,6 +302,14 @@ function EditQuestion() {
                     ></CFormCheck>
                     <CFormLabel htmlFor="hard">Hard</CFormLabel>
                   </div>
+                </div>
+                <div className="d-flex gap-3">
+                  <CFormCheck
+                    id="calc?"
+                    checked={calc}
+                    onChange={() => setCalc((e) => !e)}
+                  ></CFormCheck>
+                  <CFormLabel htmlFor="calc?">Student can use calculator?</CFormLabel>
                 </div>
                 <div className="d-flex gap-3">
                   <CFormCheck
