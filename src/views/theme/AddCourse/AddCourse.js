@@ -20,6 +20,7 @@ function AddCourse() {
   const [preview, setPreview] = useState(null)
   const [description, setDescription] = useState('')
   const [isCreateCourse, setIsCreateCourse] = useState(false)
+  const [timer, setTimer] = useState(0)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -35,15 +36,17 @@ function AddCourse() {
 
   const handleSubmitCourse = (e) => {
     e.preventDefault()
+    if (name === '' || preview === null || description === '') return
     const course = {
       name: name,
       image: preview,
       description: description,
-      timer: 60,
+      timer: timer,
     }
 
     setIsCreateCourse(true)
     const token = localStorage.getItem('token')
+    console.log(course)
     axios
       .post(`https://courses-website-q0gf.onrender.com/api/course`, course, {
         headers: {
@@ -55,6 +58,7 @@ function AddCourse() {
         setImage(null)
         setPreview(null)
         setDescription('')
+        setTimer(0)
       })
       .then((error) => {
         console.log(error)
@@ -110,8 +114,19 @@ function AddCourse() {
                 <CFormTextarea
                   id="exampleFormControlTextarea1"
                   rows={3}
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></CFormTextarea>
+              </div>
+              <div className="mb-3">
+                <CFormLabel htmlFor="timer">Time by minutes for final exam</CFormLabel>
+                <CFormInput
+                  type="number"
+                  id="timer"
+                  min={0}
+                  value={timer}
+                  onChange={(e) => setTimer(e.target.value)}
+                ></CFormInput>
               </div>
               <div className="col-auto text-center">
                 <CButton
