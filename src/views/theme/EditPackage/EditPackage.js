@@ -8,17 +8,14 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CFormTextarea,
   CRow,
 } from '@coreui/react'
-import { DocsExample } from 'src/components'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 function EditPackage() {
   const { pkgID } = useParams()
-  const [pkg, setPkg] = useState(null)
   const [isGetPkg, setIsGetPkg] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState('')
@@ -27,6 +24,20 @@ function EditPackage() {
   const [priceDollar, setPriceDollar] = useState()
   const [description, setDescription] = useState([])
   const [preview, setPreview] = useState('')
+
+  function handleAddDescription() {
+    if (preview === '') return
+    setDescription((e) => [...e, preview])
+    setPreview('')
+  }
+
+  function handleDeleteItemDescription(itemIdx) {
+    console.log(itemIdx)
+    let tmp = []
+    description.map((item, idx) => (itemIdx !== idx ? (tmp = [...tmp, item]) : null))
+    console.log(tmp)
+    setDescription(tmp)
+  }
 
   const handleEditing = (e) => {
     e.preventDefault()
@@ -49,12 +60,7 @@ function EditPackage() {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((response) => {
-          // setData(response.data.content);
-          // setLoading(false);
-
-          console.log(response.data)
-        })
+        .then(() => {})
         .catch((error) => {
           // setError(error);
           // setLoading(false);
@@ -82,7 +88,7 @@ function EditPackage() {
         setPriceEG(pkg.priceForEgypt)
         setPriceDollar(pkg.priceForNonEgypt)
         setDescription(pkg.description)
-        setPreview(pkg.description[0])
+        setPreview('')
       })
       .catch((error) => {
         console.log(error.response.data)
@@ -148,26 +154,61 @@ function EditPackage() {
               </div>
               <div className="mb-3">
                 <CFormLabel htmlFor="exampleFormControlTextarea1">Description</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="exampleFormControlInput1"
-                  placeholder="Description"
-                  value={preview}
-                  onChange={(e) => setPreview(e.target.value)}
-                  onBlur={() => {
-                    setDescription([...description, preview])
-                    setPreview('')
-                  }}
-                />
+                <div className="d-flex justify-content-between ">
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder="Description"
+                    value={preview}
+                    onChange={(e) => {
+                      setPreview(e.target.value)
+                    }}
+                    style={{ width: '70%' }}
+                  />
+                  <CButton
+                    color="primary"
+                    type="button"
+                    className="mb-3 w-25"
+                    onClick={handleAddDescription}
+                    disabled={isEditing}
+                    style={{ width: '20%' }}
+                  >
+                    Add
+                  </CButton>
+                </div>
               </div>
+              {description.length !== 0 && (
+                <div>
+                  <p>Description List : </p>
+                  <ol>
+                    {description.map((item, idx) => (
+                      <div className="d-flex gap-5" key={idx}>
+                        <li>{item}</li>
+                        <span
+                          className="text-danger"
+                          style={{
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                            fontWeight: '600',
+                          }}
+                          onClick={() => handleDeleteItemDescription(idx)}
+                        >
+                          Delete
+                        </span>
+                      </div>
+                    ))}
+                  </ol>
+                </div>
+              )}
               <div className="col-auto text-center">
                 <CButton
                   color="primary"
                   type="submit"
                   className="mb-3 w-25"
                   onClick={handleEditing}
+                  disabled={isEditing}
                 >
-                  Edit Package
+                  {isEditing ? 'Loading ...' : 'Edit Package'}
                 </CButton>
               </div>
             </CForm>

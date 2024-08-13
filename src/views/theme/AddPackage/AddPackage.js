@@ -8,55 +8,69 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CFormTextarea,
   CRow,
 } from '@coreui/react'
-import { DocsExample } from 'src/components'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
 function AddPackage() {
   const [name, setName] = useState('')
-  const [duration, setDuration] = useState()
-  const [priceEG, setPriceEG] = useState()
-  const [priceDollar, setPriceDollar] = useState()
+  const [duration, setDuration] = useState('')
+  const [priceEG, setPriceEG] = useState('')
+  const [priceDollar, setPriceDollar] = useState('')
   const [description, setDescription] = useState([])
   const [preview, setPreview] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  function handleAddDescription() {
+    setDescription((e) => [...e, preview])
+    setPreview('')
+  }
+
+  function handleDeleteItemDescription(itemIdx) {
+    console.log(itemIdx)
+    let tmp = []
+    description.map((item, idx) => (itemIdx !== idx ? (tmp = [...tmp, item]) : null))
+    console.log(tmp)
+    setDescription(tmp)
+  }
 
   const handleAdding = (e) => {
     e.preventDefault()
-    if (!name || !duration || !priceDollar || !priceEG || !description) {
-      console.log('fdsflsdkf')
-      toast('Here is your toast.')
-    } else {
-      const token = localStorage.getItem('token')
-      const packages = {
-        name: name,
-        durationByMonths: duration,
-        priceForNonEgypt: priceDollar,
-        priceForEgypt: priceEG,
-        description: description,
-      }
-      axios
-        .post('https://courses-website-q0gf.onrender.com/package', packages, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          // setData(response.data.content);
-          // setLoading(false);
-
-          console.log(response.data)
-          toast('Added Succissfully')
-        })
-        .catch((error) => {
-          // setError(error);
-          // setLoading(false);
-          console.log(error)
-        })
+    if (name === '' || duration === '' || priceDollar === '' || priceEG === '') {
+      console.log('ok')
+      return
     }
+    setIsLoading(true)
+    const token = localStorage.getItem('token')
+    const packages = {
+      name: name,
+      durationByMonths: duration,
+      priceForNonEgypt: priceDollar,
+      priceForEgypt: priceEG,
+      description: description,
+    }
+    axios
+      .post('https://courses-website-q0gf.onrender.com/package', packages, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        setName('')
+        setDuration('')
+        setPriceEG('')
+        setPriceDollar('')
+        setDescription([])
+        setPreview('')
+      })
+      .catch((error) => {
+        // setError(error);
+        console.log(error)
+      })
+      .finally(() => setIsLoading(false))
   }
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -109,29 +123,61 @@ function AddPackage() {
               </div>
               <div className="mb-3">
                 <CFormLabel htmlFor="exampleFormControlTextarea1">Description</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="exampleFormControlInput1"
-                  placeholder="Description"
-                  value={preview}
-                  onChange={(e) => setPreview(e.target.value)}
-                  onBlur={() => {
-                    setDescription([...description, preview])
-                    setPreview('')
-                  }}
-                />
+                <div className="d-flex justify-content-between ">
+                  <CFormInput
+                    type="text"
+                    id="exampleFormControlInput1"
+                    placeholder="Description"
+                    value={preview}
+                    onChange={(e) => {
+                      setPreview(e.target.value)
+                    }}
+                    style={{ width: '70%' }}
+                  />
+                  <CButton
+                    color="primary"
+                    type="button"
+                    className="mb-3 w-25"
+                    onClick={handleAddDescription}
+                    disabled={isLoading}
+                    style={{ width: '20%' }}
+                  >
+                    Add
+                  </CButton>
+                </div>
               </div>
-              <div className="mb-3">
-                <p>page Description:</p>
-                <ol>
-                  {description?.map((item, idx) => {
-                    return <li key={idx}>{item}</li>
-                  })}
-                </ol>
-              </div>
+              {description.length !== 0 && (
+                <div>
+                  <p>Description List : </p>
+                  <ol>
+                    {description.map((item, idx) => (
+                      <div className="d-flex gap-5" key={idx}>
+                        <li>{item}</li>
+                        <span
+                          className="text-danger"
+                          style={{
+                            cursor: 'pointer',
+                            textDecoration: 'underline',
+                            fontWeight: '600',
+                          }}
+                          onClick={() => handleDeleteItemDescription(idx)}
+                        >
+                          Delete
+                        </span>
+                      </div>
+                    ))}
+                  </ol>
+                </div>
+              )}
               <div className="col-auto text-center">
-                <CButton color="primary" type="submit" className="mb-3 w-25" onClick={handleAdding}>
-                  Add Package
+                <CButton
+                  color="primary"
+                  type="submit"
+                  className="mb-3 w-25"
+                  onClick={handleAdding}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Loading ...' : 'Add Package'}
                 </CButton>
               </div>
             </CForm>
