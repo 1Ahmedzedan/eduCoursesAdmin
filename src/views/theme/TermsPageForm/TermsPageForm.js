@@ -31,7 +31,7 @@ function TermsPageForm() {
     const token = localStorage.getItem('token')
     axios
       .put(
-        `https://courses-website-q0gf.onrender.com/api/pages/66b74a640606c930e3954a59?id=66b74a640606c930e3954a59`,
+        `https://courses-website-q0gf.onrender.com/api/pages/66bb64360c9ba27f7be93739?id=66bb64360c9ba27f7be93739`,
         page,
         {
           headers: {
@@ -84,8 +84,8 @@ function TermsPageForm() {
             <CForm>
               <div className="mb-3">
                 <CFormLabel htmlFor="exampleFormControlInput2">Content of Terms Page</CFormLabel>
-                <CFormInput
-                  type="text"
+                <CFormTextarea
+                  rows={8}
                   id="exampleFormControlInput2"
                   placeholder="content of terms page"
                   value={content}
