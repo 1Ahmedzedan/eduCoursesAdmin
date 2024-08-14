@@ -26,7 +26,6 @@ function TermsPageForm() {
       terms: content,
     }
 
-    console.log(page)
     setIsSubmited(true)
     const token = localStorage.getItem('token')
     axios
@@ -39,9 +38,7 @@ function TermsPageForm() {
           },
         },
       )
-      .then((response) => {
-        console.log(response)
-      })
+      .then(() => {})
       .then((error) => {
         console.log(error)
       })
@@ -59,7 +56,6 @@ function TermsPageForm() {
         },
       })
       .then((response) => {
-        console.log(response.data[0])
         setFullPage(response.data[0])
         setContent(response.data[0].terms)
       })

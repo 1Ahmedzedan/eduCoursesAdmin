@@ -49,7 +49,6 @@ function Lessons() {
         },
       )
       .then((response) => {
-        console.log(response)
         const transformedData = response.data.map((item) => ({
           id: item.id,
           name: item.name,

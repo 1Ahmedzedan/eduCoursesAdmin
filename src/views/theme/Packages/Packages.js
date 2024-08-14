@@ -42,15 +42,10 @@ function Packages() {
         },
       })
       .then((response) => {
-        // setData(response.data.content);
-        // setLoading(false);
-
         setData(response.data)
         setLoading(false)
       })
       .catch((error) => {
-        // setError(error);
-        // setLoading(false);
         console.log(error.response.data)
       })
   }, [isDeleting])

@@ -46,7 +46,6 @@ function AddQuestion() {
   }
 
   const handleSubmit = (e) => {
-    console.log('submit')
     setIsCreateQuestion(true)
     if (
       question === '' ||
@@ -104,8 +103,6 @@ function AddQuestion() {
         setIsCreateQuestion(false)
       })
   }
-
-  // console.log(options[0])
 
   return (
     <CRow>

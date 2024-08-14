@@ -33,7 +33,6 @@ function ProfileInfo() {
 
   if (loading) return <div>Loading ...</div>
   if (error) return <div>{error}</div>
-  console.log(user)
   return (
     <div className={`${styles.profile_info_container}`}>
       <div className={`${styles.header}`}>

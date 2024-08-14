@@ -57,12 +57,7 @@ function EditCourse() {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        // setData(response.data.content);
-        // setLoading(false);
-
-        console.log(response.data)
-      })
+      .then(() => {})
       .catch((error) => {
         // setError(error);
         // setLoading(false);

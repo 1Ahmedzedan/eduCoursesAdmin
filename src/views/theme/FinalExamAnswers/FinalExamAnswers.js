@@ -19,7 +19,6 @@ function FinalExamAnswers() {
         },
       })
       .then((response) => {
-        // console.log(response)
         setQuistions(response.data.finalQuiz)
       })
       .catch((error) => {

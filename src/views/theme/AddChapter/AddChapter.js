@@ -8,12 +8,10 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CFormTextarea,
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-// import { DocsExample } from 'src/components'
 
 function AddChapter() {
   const { courseID } = useParams()
@@ -26,8 +24,6 @@ function AddChapter() {
       name: name,
       courseId: courseID,
     }
-
-    console.log(chapter)
 
     setIsCreateLesson(true)
     const token = localStorage.getItem('token')

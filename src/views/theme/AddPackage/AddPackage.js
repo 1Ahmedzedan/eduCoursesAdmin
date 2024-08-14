@@ -28,17 +28,14 @@ function AddPackage() {
   }
 
   function handleDeleteItemDescription(itemIdx) {
-    console.log(itemIdx)
     let tmp = []
     description.map((item, idx) => (itemIdx !== idx ? (tmp = [...tmp, item]) : null))
-    console.log(tmp)
     setDescription(tmp)
   }
 
   const handleAdding = (e) => {
     e.preventDefault()
     if (name === '' || duration === '' || priceDollar === '' || priceEG === '') {
-      console.log('ok')
       return
     }
     setIsLoading(true)
@@ -65,7 +62,6 @@ function AddPackage() {
         setPreview('')
       })
       .catch((error) => {
-        // setError(error);
         console.log(error)
       })
       .finally(() => setIsLoading(false))

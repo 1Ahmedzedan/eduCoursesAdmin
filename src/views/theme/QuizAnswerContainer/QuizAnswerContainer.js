@@ -23,7 +23,6 @@ function QuizAnswerContainer() {
         },
       )
       .then((response) => {
-        console.log(response)
         setQuistions(response.data)
       })
       .catch((error) => console.log(error))
@@ -33,7 +32,6 @@ function QuizAnswerContainer() {
   }, [isDeleteQuestion])
 
   if (loading || questions === undefined) return <div>Loading ....</div>
-  // console.log(questions)
   return (
     <div className={`${styles.question_container}`}>
       <button

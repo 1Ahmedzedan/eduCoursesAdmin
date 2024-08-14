@@ -71,8 +71,6 @@ function EditQuestion() {
       calc: calc,
     }
 
-    console.log(createdQuestion)
-
     setIsEditQuestion(true)
     const token = localStorage.getItem('token')
     const url =
@@ -117,7 +115,6 @@ function EditQuestion() {
         .then((response) => {
           const q = response.data.finalQuiz[QuestionIdx]
           setData(response.data.finalQuiz[QuestionIdx])
-          console.log(q)
           setQuestion(q.question)
           setOption1(q.options[0])
           setOption2(q.options[1])
@@ -128,7 +125,7 @@ function EditQuestion() {
           setPreview(q.image)
         })
         .catch((error) => {
-          console.log('error')
+          console.log(error)
         })
         .finally(() => {
           setLoading(false)
@@ -145,10 +142,6 @@ function EditQuestion() {
         )
         .then((response) => {
           const q = response.data[QuestionIdx]
-          console.log(response)
-          console.log(
-            `https://courses-website-q0gf.onrender.com/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
-          )
           setData(response.data[QuestionIdx])
           setQuestion(q.question)
           setOption1(q.options[0])

@@ -6,14 +6,12 @@ import {
   CCardHeader,
   CCol,
   CForm,
-  CFormInput,
   CFormLabel,
   CFormTextarea,
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-// import { DocsExample } from 'src/components'
 
 function AboutPageForm() {
   const [isSubmited, setIsSubmited] = useState(false)

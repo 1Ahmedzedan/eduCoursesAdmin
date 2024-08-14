@@ -46,7 +46,6 @@ function AddCourse() {
 
     setIsCreateCourse(true)
     const token = localStorage.getItem('token')
-    console.log(course)
     axios
       .post(`https://courses-website-q0gf.onrender.com/api/course`, course, {
         headers: {

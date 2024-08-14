@@ -32,18 +32,15 @@ function EditPackage() {
   }
 
   function handleDeleteItemDescription(itemIdx) {
-    console.log(itemIdx)
     let tmp = []
     description.map((item, idx) => (itemIdx !== idx ? (tmp = [...tmp, item]) : null))
-    console.log(tmp)
     setDescription(tmp)
   }
 
   const handleEditing = (e) => {
     e.preventDefault()
-    if (!name || !duration || !priceDollar || !priceEG || !description) {
-      console.log('fdsflsdkf')
-      toast('Here is your toast.')
+    if (name === '' || duration === '' || priceDollar === '' || priceEG === '') {
+      return
     } else {
       const token = localStorage.getItem('token')
       const packages = {
@@ -62,8 +59,6 @@ function EditPackage() {
         })
         .then(() => {})
         .catch((error) => {
-          // setError(error);
-          // setLoading(false);
           console.log(error)
         })
         .finally(() => {
