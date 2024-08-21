@@ -10,6 +10,9 @@ import TermsPageForm from './views/theme/TermsPageForm/TermsPageForm'
 import ContactPageForm from './views/theme/ContactPageForm/ContactPageForm'
 import Chapters from './views/theme/Chapters/Chapters'
 import AddChapter from './views/theme/AddChapter/AddChapter'
+import { element } from 'prop-types'
+import PromoCode from './views/theme/PromoCode/PromoCode'
+import AddPromoCode from './views/theme/AddPromoCode/AddPromoCode'
 
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
@@ -85,6 +88,18 @@ const routes = [
     path: '/ContactPage',
     name: 'TermsPage',
     element: ContactPageForm,
+  },
+
+  {
+    path: '/promoCode',
+    name: 'promoCode',
+    element: PromoCode,
+  },
+
+  {
+    path: '/addPromoCode',
+    name: 'addPromoCode',
+    element: AddPromoCode,
   },
 ]
 

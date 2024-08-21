@@ -1,7 +1,7 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cibPagekit, cibReadTheDocs, cibSuperuser, cibWebpack } from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+import { cibPagekit, cibReadTheDocs, cibSuperuser, cibWebpack, cibXrp } from '@coreui/icons'
+import { CNavItem } from '@coreui/react'
 
 const _nav = [
   {
@@ -28,6 +28,12 @@ const _nav = [
     name: 'Pages',
     to: '/pages',
     icon: <CIcon icon={cibPagekit} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'promoCode',
+    to: '/promoCode',
+    icon: <CIcon icon={cibXrp} customClassName="nav-icon" />,
   },
 ]
 
