@@ -36,7 +36,7 @@ function QuizAnswerContainer() {
     <div className={`${styles.question_container}`}>
       <button
         className={`${styles.add_btn}`}
-        onClick={() => navigate(`/addQuestion/${courseID}/${lessonID}`)}
+        onClick={() => navigate(`/lessonQuestion/addQuestion/${courseID}/${lessonID}/${level}`)}
       >
         Add Question
       </button>

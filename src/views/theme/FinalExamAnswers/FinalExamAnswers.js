@@ -32,7 +32,10 @@ function FinalExamAnswers() {
   if (loading || questions === undefined) return <div>Loading ....</div>
   return (
     <div className={`${styles.question_container}`}>
-      <button className={`${styles.add_btn}`} onClick={() => navigate(`/addQuestion/${courseID}`)}>
+      <button
+        className={`${styles.add_btn}`}
+        onClick={() => navigate(`/finalExam/addQuestion/${courseID}`)}
+      >
         Add Question
       </button>
       {!questions?.length ? (

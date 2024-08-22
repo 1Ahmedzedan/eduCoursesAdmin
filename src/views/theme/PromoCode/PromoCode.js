@@ -42,8 +42,10 @@ function PromoCode() {
     { field: 'code', headerName: 'Code', width: 150 },
     { field: 'discountValue', headerName: 'Discount Value', width: 150 },
     { field: 'createAt', headerName: 'Create At', width: 150 },
-    { field: 'expired', headerName: 'Duration', width: 150 },
+    { field: 'expired', headerName: 'Duration Per Month', width: 150 },
   ]
+
+  if (isloading) return <div>Loading...</div>
 
   return (
     <div>
