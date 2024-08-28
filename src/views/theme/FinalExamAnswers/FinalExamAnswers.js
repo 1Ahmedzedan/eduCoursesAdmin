@@ -4,7 +4,7 @@ import styles from './QuizAnswerContainer.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 function FinalExamAnswers() {
-  const { courseID } = useParams()
+  const { courseID, idx } = useParams()
   const [questions, setQuistions] = useState()
   const [loading, setLoading] = useState(false)
   const [isDeleteQuestion, setIsDeleteQuestion] = useState(false)
@@ -13,13 +13,16 @@ function FinalExamAnswers() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .get(
+        `https://courses-website-q0gf.onrender.com/api/course/questions?courseId=${courseID}&idx=${idx}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
-        setQuistions(response.data.finalQuiz)
+        setQuistions(response.data)
       })
       .catch((error) => {
         console.log(error)
@@ -34,7 +37,7 @@ function FinalExamAnswers() {
     <div className={`${styles.question_container}`}>
       <button
         className={`${styles.add_btn}`}
-        onClick={() => navigate(`/finalExam/addQuestion/${courseID}`)}
+        onClick={() => navigate(`/practiceTestView/addQuestion/${courseID}/${idx}`)}
       >
         Add Question
       </button>

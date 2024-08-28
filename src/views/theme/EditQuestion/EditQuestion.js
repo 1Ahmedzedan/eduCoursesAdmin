@@ -13,12 +13,14 @@ import {
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 // import { DocsExample } from 'src/components'
 
 function EditQuestion() {
-  const { QuestionIdx, lessonID, courseID, level: levelPram } = useParams()
+  const { QuestionIdx, lessonID, courseID, level: levelPram, idx } = useParams()
   const [data, setData] = useState(null)
+  const location = useLocation()
+  const currentPath = location.pathname
   const [question, setQuestion] = useState('')
   const [option1, setOption1] = useState('')
   const [option2, setOption2] = useState('')
@@ -107,14 +109,17 @@ function EditQuestion() {
     const token = localStorage.getItem('token')
     if (lessonID === undefined) {
       axios
-        .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        .get(
+          `https://courses-website-q0gf.onrender.com/api/course/questions?courseId=${courseID}&idx=${idx}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        })
+        )
         .then((response) => {
-          const q = response.data.finalQuiz[QuestionIdx]
-          setData(response.data.finalQuiz[QuestionIdx])
+          const q = response.data[QuestionIdx]
+          setData(response.data[QuestionIdx])
           setQuestion(q.question)
           setOption1(q.options[0])
           setOption2(q.options[1])
@@ -123,6 +128,7 @@ function EditQuestion() {
           setExplain(q.explanation)
           setCorrectAnswer(q.correctAnswer)
           setPreview(q.image)
+          setCalc(q.calc)
         })
         .catch((error) => {
           console.log(error)
@@ -229,15 +235,17 @@ function EditQuestion() {
                     onChange={(e) => setCorrectAnswer(e.target.value)}
                   ></CFormTextarea>
                 </div>
-                <div className="mb-3">
-                  <CFormLabel htmlFor="explain">Explain</CFormLabel>
-                  <CFormTextarea
-                    id="explain"
-                    placeholder="Explain"
-                    value={explain}
-                    onChange={(e) => setExplain(e.target.value)}
-                  ></CFormTextarea>
-                </div>
+                {!currentPath.includes('editQuestionPracticeTest') && (
+                  <div className="mb-3">
+                    <CFormLabel htmlFor="explain">Explain</CFormLabel>
+                    <CFormTextarea
+                      id="explain"
+                      placeholder="Explain"
+                      value={explain}
+                      onChange={(e) => setExplain(e.target.value)}
+                    ></CFormTextarea>
+                  </div>
+                )}
                 <div className="mb-3">
                   <CFormLabel htmlFor="exampleFormControlTextarea1">Image</CFormLabel>
                   <CFormInput
@@ -260,42 +268,44 @@ function EditQuestion() {
                     />
                   )}
                 </div>
-                <div>
-                  <p>Question level : </p>
-                  <div className="d-flex gap-3">
-                    <CFormCheck
-                      type="radio"
-                      name="level"
-                      id="easy"
-                      value="easy"
-                      checked={level === 'easy'}
-                      onChange={() => setLevel('easy')}
-                    ></CFormCheck>
-                    <CFormLabel htmlFor="easy">Easy</CFormLabel>
+                {!currentPath.includes('editQuestionPracticeTest') && (
+                  <div>
+                    <p>Question level : </p>
+                    <div className="d-flex gap-3">
+                      <CFormCheck
+                        type="radio"
+                        name="level"
+                        id="easy"
+                        value="easy"
+                        checked={level === 'easy'}
+                        onChange={() => setLevel('easy')}
+                      ></CFormCheck>
+                      <CFormLabel htmlFor="easy">Easy</CFormLabel>
+                    </div>
+                    <div className="d-flex gap-3">
+                      <CFormCheck
+                        type="radio"
+                        name="level"
+                        id="medium"
+                        value="medium"
+                        checked={level === 'medium'}
+                        onChange={() => setLevel('medium')}
+                      ></CFormCheck>
+                      <CFormLabel htmlFor="medium">Medium</CFormLabel>
+                    </div>
+                    <div className="d-flex gap-3">
+                      <CFormCheck
+                        type="radio"
+                        name="level"
+                        id="hard"
+                        value="hard"
+                        checked={level === 'hard'}
+                        onChange={() => setLevel('hard')}
+                      ></CFormCheck>
+                      <CFormLabel htmlFor="hard">Hard</CFormLabel>
+                    </div>
                   </div>
-                  <div className="d-flex gap-3">
-                    <CFormCheck
-                      type="radio"
-                      name="level"
-                      id="medium"
-                      value="medium"
-                      checked={level === 'medium'}
-                      onChange={() => setLevel('medium')}
-                    ></CFormCheck>
-                    <CFormLabel htmlFor="medium">Medium</CFormLabel>
-                  </div>
-                  <div className="d-flex gap-3">
-                    <CFormCheck
-                      type="radio"
-                      name="level"
-                      id="hard"
-                      value="hard"
-                      checked={level === 'hard'}
-                      onChange={() => setLevel('hard')}
-                    ></CFormCheck>
-                    <CFormLabel htmlFor="hard">Hard</CFormLabel>
-                  </div>
-                </div>
+                )}
                 <div className="d-flex gap-3">
                   <CFormCheck
                     id="calc?"
@@ -304,14 +314,16 @@ function EditQuestion() {
                   ></CFormCheck>
                   <CFormLabel htmlFor="calc?">Student can use calculator?</CFormLabel>
                 </div>
-                <div className="d-flex gap-3">
-                  <CFormCheck
-                    id="free?"
-                    checked={free}
-                    onChange={() => setFree((e) => !e)}
-                  ></CFormCheck>
-                  <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
-                </div>
+                {!currentPath.includes('editQuestionPracticeTest') && (
+                  <div className="d-flex gap-3">
+                    <CFormCheck
+                      id="free?"
+                      checked={free}
+                      onChange={() => setFree((e) => !e)}
+                    ></CFormCheck>
+                    <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
+                  </div>
+                )}
                 <div className="col-auto text-center">
                   <CButton
                     color="primary"

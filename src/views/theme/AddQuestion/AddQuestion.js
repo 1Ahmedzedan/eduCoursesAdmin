@@ -7,7 +7,6 @@ import {
   CCol,
   CForm,
   CFormCheck,
-  CFormControlWrapper,
   CFormInput,
   CFormLabel,
   CFormTextarea,
@@ -15,10 +14,9 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useLocation, useParams } from 'react-router-dom'
-// import { DocsExample } from 'src/components'
 
 function AddQuestion() {
-  const { courseID, lessonID, level } = useParams()
+  const { courseID, lessonID, level, idx } = useParams()
   const location = useLocation()
   const currentPath = location.pathname
   const [question, setQuestion] = useState('')
@@ -73,9 +71,11 @@ function AddQuestion() {
     }
 
     const token = localStorage.getItem('token')
+    const idxPrameter = idx === undefined ? -1 : idx
+
     const url =
       lessonID === undefined
-        ? `https://courses-website-q0gf.onrender.com/api/course/question?courseId=${courseID}`
+        ? `https://courses-website-q0gf.onrender.com/api/course/question?courseId=${courseID}&idx=${idxPrameter}`
         : `https://courses-website-q0gf.onrender.com/api/lesson/question?lessonId=${lessonID}`
     axios
       .post(url, createdQuestion, {
@@ -84,6 +84,8 @@ function AddQuestion() {
         },
       })
       .then(() => {
+        console.log('successfully added')
+
         setQuestion('')
         setOption1('')
         setOption2('')
@@ -94,7 +96,6 @@ function AddQuestion() {
         setImage('')
         setPreview('')
         setFree(false)
-        setLevel('easy')
         setCalc(false)
       })
       .then((error) => {
@@ -169,17 +170,18 @@ function AddQuestion() {
                     onChange={(e) => setCorrectAnswer(e.target.value)}
                   ></CFormTextarea>
                 </div>
-                {!currentPath.includes('finalExam') && (
-                  <div className="mb-3">
-                    <CFormLabel htmlFor="explain">Explain</CFormLabel>
-                    <CFormTextarea
-                      id="explain"
-                      placeholder="Explain"
-                      value={explain}
-                      onChange={(e) => setExplain(e.target.value)}
-                    ></CFormTextarea>
-                  </div>
-                )}
+                {!currentPath.includes('addNewTest') &&
+                  !currentPath.includes('practiceTestView') && (
+                    <div className="mb-3">
+                      <CFormLabel htmlFor="explain">Explain</CFormLabel>
+                      <CFormTextarea
+                        id="explain"
+                        placeholder="Explain"
+                        value={explain}
+                        onChange={(e) => setExplain(e.target.value)}
+                      ></CFormTextarea>
+                    </div>
+                  )}
                 <div className="mb-3">
                   <CFormLabel htmlFor="exampleFormControlTextarea1">Image</CFormLabel>
                   <CFormInput
@@ -238,26 +240,25 @@ function AddQuestion() {
                     <CFormLabel htmlFor="hard">Hard</CFormLabel>
                   </div>
                 </div> */}
-                {!currentPath.includes('finalExam') && (
-                  <div className="d-flex gap-3">
-                    <CFormCheck
-                      id="calc?"
-                      checked={calc}
-                      onChange={() => setCalc((e) => !e)}
-                    ></CFormCheck>
-                    <CFormLabel htmlFor="calc?">Student can use calculator?</CFormLabel>
-                  </div>
-                )}
-                {!currentPath.includes('finalExam') && (
-                  <div className="d-flex gap-3">
-                    <CFormCheck
-                      id="free?"
-                      checked={free}
-                      onChange={() => setFree((e) => !e)}
-                    ></CFormCheck>
-                    <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
-                  </div>
-                )}
+                <div className="d-flex gap-3">
+                  <CFormCheck
+                    id="calc?"
+                    checked={calc}
+                    onChange={() => setCalc((e) => !e)}
+                  ></CFormCheck>
+                  <CFormLabel htmlFor="calc?">Student can use calculator?</CFormLabel>
+                </div>
+                {!currentPath.includes('addNewTest') &&
+                  !currentPath.includes('practiceTestView') && (
+                    <div className="d-flex gap-3">
+                      <CFormCheck
+                        id="free?"
+                        checked={free}
+                        onChange={() => setFree((e) => !e)}
+                      ></CFormCheck>
+                      <CFormLabel htmlFor="free?">Is question for free ?</CFormLabel>
+                    </div>
+                  )}
               </div>
               <div className="col-auto text-center">
                 <CButton

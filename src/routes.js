@@ -13,6 +13,7 @@ import AddChapter from './views/theme/AddChapter/AddChapter'
 import { element } from 'prop-types'
 import PromoCode from './views/theme/PromoCode/PromoCode'
 import AddPromoCode from './views/theme/AddPromoCode/AddPromoCode'
+import PracticeTests from './views/theme/PracticeTests/PracticeTests'
 
 const Courses = React.lazy(() => import('./views/theme/Courses/Courses'))
 const Lessons = React.lazy(() => import('./views/theme/Lessons/Lessons'))
@@ -34,7 +35,8 @@ const routes = [
   { path: '/courses', name: 'Courses', element: Courses },
   { path: '/chapters/:courseID', name: 'Chapters', element: Chapters },
   { path: '/lessons/:courseID/:chapterID', name: 'Lessons', element: Lessons },
-  { path: '/finalExam/:courseID', name: 'finalExam', element: FinalExamAnswers },
+  { path: '/PracticeTests/:courseID', name: 'PracticeTests', element: PracticeTests },
+  { path: '/PracticeTestView/:courseID/:idx', name: 'PracticeTestView', element: FinalExamAnswers },
   {
     path: '/lessonQuestion/:courseID/:lessonID/:level',
     name: 'lessonQuestion',
@@ -49,7 +51,7 @@ const routes = [
   { path: '/editPackage/:pkgID', name: 'addCourse', element: EditPackage },
   { path: '/editQuestion/:lessonID/:QuestionIdx/:level', name: 'addCourse', element: EditQuestion },
   {
-    path: '/editQuestionFinalExam/:courseID/:QuestionIdx',
+    path: '/editQuestionPracticeTest/:courseID/:idx/:QuestionIdx',
     name: 'addCourse',
     element: EditQuestion,
   },
@@ -58,7 +60,12 @@ const routes = [
     name: 'addCourse',
     element: AddQuestion,
   },
-  { path: '/finalExam/addQuestion/:courseID', name: 'addCourse', element: AddQuestion },
+  { path: '/addNewTest/:courseID', name: 'addNewPracticeTest', element: AddQuestion },
+  {
+    path: '/practiceTestView/addQuestion/:courseID/:idx',
+    name: 'addQuestionToPracticeTest',
+    element: AddQuestion,
+  },
   { path: '/users', name: 'Users', element: Users },
   { path: '/userInfo/:userID', name: 'users', element: ProfileInfo },
   { path: '/userCourses/:userID', name: 'userCourses', element: ProfileCourses },

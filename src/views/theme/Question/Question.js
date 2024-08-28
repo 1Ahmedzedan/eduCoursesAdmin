@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Question({ question, questionIndex, setIsDeleteQuestion }) {
-  const { lessonID, courseID, level } = useParams()
+  const { lessonID, courseID, level, idx } = useParams()
   const [isDeleting, setIsDeleting] = useState(false)
   const navigate = useNavigate()
   function handleDeleteQuestion() {
@@ -13,7 +13,7 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
     setIsDeleting(true)
     const url =
       lessonID === undefined
-        ? `https://courses-website-q0gf.onrender.com/api/course/question?questionId=${question.id}`
+        ? `https://courses-website-q0gf.onrender.com/api/course/question?questionId=${question.id}&idx=${idx}`
         : `https://courses-website-q0gf.onrender.com/api/lesson/question?questionId=${question.id}`
     axios
       .delete(url, {
@@ -39,7 +39,7 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
           className={`${styles.edit_btn}`}
           onClick={() =>
             lessonID === undefined
-              ? navigate(`/editQuestionFinalExam/${courseID}/${questionIndex}`)
+              ? navigate(`/editQuestionPracticeTest/${courseID}/${idx}/${questionIndex}`)
               : navigate(`/editQuestion/${lessonID}/${questionIndex}/${level}`)
           }
         >
