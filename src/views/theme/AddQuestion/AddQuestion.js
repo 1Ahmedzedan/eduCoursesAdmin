@@ -84,8 +84,6 @@ function AddQuestion() {
         },
       })
       .then(() => {
-        console.log('successfully added')
-
         setQuestion('')
         setOption1('')
         setOption2('')

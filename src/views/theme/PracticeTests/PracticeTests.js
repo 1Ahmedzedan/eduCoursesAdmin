@@ -18,11 +18,14 @@ function PracticeTests() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/api/course?courseId=${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .delete(
+        `https://courses-website-q0gf.onrender.com/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      })
+      )
       .then((response) => {
         const data = response.data
       })
@@ -44,8 +47,6 @@ function PracticeTests() {
       })
       .then((response) => {
         const tests = response.data.finalExams
-        console.log(response.data)
-
         const transformedData = tests?.map((item, idx) => ({
           id: idx,
           name: `Test ${idx + 1}`,
@@ -76,13 +77,13 @@ function PracticeTests() {
       renderCell: (params) => {
         return (
           <div className="d-flex">
-            {/* <p
+            <p
               className="mb-0 me-3 text-danger fw-bold"
               style={{ cursor: 'pointer' }}
               onClick={() => handleDelete(params.row.id)}
             >
               Delete
-            </p> */}
+            </p>
 
             <p
               className="mb-0 me-3 fw-bold"
