@@ -40,9 +40,12 @@ export default defineConfig(() => {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.scss'],
     },
     server: {
-      port: 3000,
       proxy: {
-        // https://vitejs.dev/config/server-options.html
+        '/api': {
+          target: 'http://92.113.26.138:8080', // Your backend API
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''), // Optional rewrite if needed
+        },
       },
     },
   }
