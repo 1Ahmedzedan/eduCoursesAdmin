@@ -77,8 +77,8 @@ function EditQuestion() {
     const token = localStorage.getItem('token')
     const url =
       lessonID === undefined
-        ? `http://92.113.26.138:8080/api/course/question`
-        : `http://92.113.26.138:8080/api/lesson/question`
+        ? `https://92.113.26.138:8080/api/course/question`
+        : `https://92.113.26.138:8080/api/lesson/question`
     axios
       .put(url, createdQuestion, {
         headers: {
@@ -110,7 +110,7 @@ function EditQuestion() {
     if (lessonID === undefined) {
       axios
         .get(
-          `http://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
+          `https://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ function EditQuestion() {
     } else {
       axios
         .get(
-          `http://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
+          `https://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

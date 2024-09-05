@@ -30,7 +30,7 @@ function TermsPageForm() {
     const token = localStorage.getItem('token')
     axios
       .put(
-        `http://92.113.26.138:8080/api/pages/66bb64360c9ba27f7be93739?id=66bb64360c9ba27f7be93739`,
+        `https://92.113.26.138:8080/api/pages/66bb64360c9ba27f7be93739?id=66bb64360c9ba27f7be93739`,
         page,
         {
           headers: {
@@ -50,7 +50,7 @@ function TermsPageForm() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/pages`, {
+      .get(`https://92.113.26.138:8080/api/pages`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

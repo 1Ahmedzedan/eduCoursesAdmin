@@ -16,7 +16,7 @@ import axios from 'axios'
 import { useLocation, useParams } from 'react-router-dom'
 
 function AddQuestion() {
-  const { courseID, lessonID, level, idx } = useParams()
+  const { courseID, lessonID, level, idx,timer } = useParams()
   
 
   const location = useLocation()
@@ -78,11 +78,12 @@ console.log(currentPath.includes('addNewTest'));
       lessonId: lessonID === undefined ? '' : lessonID,
       courseId: courseID,
       question: question,
-      image: preview,
+      questionImage: preview,
       options: [option1, option2, option3, option4,option5],
       correctAnswer: correctAnswer,
       explanation: explain,
       free: free,
+      explanationImage:explainPreview,
       level: level === undefined ? '' : level,
       calc: calc,
     }
@@ -92,8 +93,8 @@ console.log(currentPath.includes('addNewTest'));
 
     const url =
       lessonID === undefined
-        ? `http://92.113.26.138:8080/api/course/question?courseId=${courseID}&idx=${idxPrameter}`
-        : `http://92.113.26.138:8080/api/lesson/question?lessonId=${lessonID}&timer=${timer}`
+        ? `https://92.113.26.138:8080/api/course/question?courseId=${courseID}&idx=${idxPrameter}`
+        : `https://92.113.26.138:8080/api/lesson/question?lessonId=${lessonID}&timer=${timer&&timer}`
     axios
       .post(url, createdQuestion, {
         headers: {
@@ -253,7 +254,7 @@ console.log(currentPath.includes('addNewTest'));
                       ></CFormTextarea>
                     </div>
                                <div className="mb-3">
-                               <CFormLabel htmlFor="exampleFormControlTextarea1" style={{fontWeight:'600'}}>Question Image</CFormLabel>
+                               <CFormLabel htmlFor="exampleFormControlTextarea1" style={{fontWeight:'600'}}>Explaination Image</CFormLabel>
                                <CFormInput
                                  type="file"
                                  id="exampleFormControlInput1"

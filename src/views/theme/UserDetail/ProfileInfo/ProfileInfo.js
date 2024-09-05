@@ -14,7 +14,7 @@ function ProfileInfo() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/user?userId=${userID}`, {
+      .get(`https://92.113.26.138:8080/api/user?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

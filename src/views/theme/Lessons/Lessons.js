@@ -21,7 +21,7 @@ function Lessons() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`http://92.113.26.138:8080/api/lesson?lessonId=${id}`, {
+      .delete(`https://92.113.26.138:8080/api/lesson?lessonId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +41,7 @@ function Lessons() {
     const token = localStorage.getItem('token')
     axios
       .get(
-        `http://92.113.26.138:8080/api/chapter/${chapterID}/lessons?chapterId=${chapterID}`,
+        `https://92.113.26.138:8080/api/chapter/${chapterID}/lessons?chapterId=${chapterID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

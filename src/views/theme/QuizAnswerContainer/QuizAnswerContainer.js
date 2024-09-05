@@ -15,7 +15,7 @@ function QuizAnswerContainer() {
     const token = localStorage.getItem('token')
     axios
       .get(
-        `http://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
+        `https://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

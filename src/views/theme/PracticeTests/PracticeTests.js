@@ -23,7 +23,7 @@ function PracticeTests() {
 
     axios
       .delete(
-        `http://92.113.26.138:8080/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
+        `https://92.113.26.138:8080/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -44,7 +44,7 @@ function PracticeTests() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/course?courseId=${courseID}`, {
+      .get(`https://92.113.26.138:8080/api/course?courseId=${courseID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

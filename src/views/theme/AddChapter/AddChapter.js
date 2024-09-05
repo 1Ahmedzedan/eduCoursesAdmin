@@ -28,7 +28,7 @@ function AddChapter() {
     setIsCreateLesson(true)
     const token = localStorage.getItem('token')
     axios
-      .post(`http://92.113.26.138:8080/api/chapter`, chapter, {
+      .post(`https://92.113.26.138:8080/api/chapter`, chapter, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

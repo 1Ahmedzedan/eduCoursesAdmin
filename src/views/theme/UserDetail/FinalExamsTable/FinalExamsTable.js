@@ -11,7 +11,7 @@ function FinalExamsTable() {
 
   useEffect(() => {
     axios
-      .get(`http://92.113.26.138:8080/api/courses/info?userId=${userID}`)
+      .get(`https://92.113.26.138:8080/api/courses/info?userId=${userID}`)
       .then((response) => {
         setAttendedExams(response.data)
       })

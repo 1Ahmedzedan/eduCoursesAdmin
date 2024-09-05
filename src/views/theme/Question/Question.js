@@ -13,8 +13,8 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
     setIsDeleting(true)
     const url =
       lessonID === undefined
-        ? `http://92.113.26.138:8080/api/course/question?questionId=${question.id}&idx=${idx}`
-        : `http://92.113.26.138:8080/api/lesson/question?questionId=${question.id}`
+        ? `https://92.113.26.138:8080/api/course/question?questionId=${question.id}&idx=${idx}`
+        : `https://92.113.26.138:8080/api/lesson/question?questionId=${question.id}`
     axios
       .delete(url, {
         headers: {

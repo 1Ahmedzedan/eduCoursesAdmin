@@ -24,7 +24,7 @@ function AddPromoCode() {
     const token = localStorage.getItem('token')
     axios
       .post(
-        `http://92.113.26.138:8080/api/promocode?discount=${discountValue}&expiryDateByMonth=${expired}`,
+        `https://92.113.26.138:8080/api/promocode?discount=${discountValue}&expiryDateByMonth=${expired}`,
         null,
         {
           headers: {
