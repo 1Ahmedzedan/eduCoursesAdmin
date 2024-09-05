@@ -16,36 +16,37 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
+import { base_url } from '../../../constant'
 
 const Login = () => {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
-  const handdleLogin=(e)=>{
-    e.preventDefault();
-    const user={
-      email:email,
-      password:password
+  const handdleLogin = (e) => {
+    e.preventDefault()
+    const user = {
+      email: email,
+      password: password,
     }
-    axios.post('http://92.113.26.138:8080/api/signin',user)
-    .then((response) => {
-      // setData(response.data.content);
-      // setLoading(false);
-      localStorage.setItem('token', response.data.token);
-      navigate(`/dashboard`);
-
-    })
-    .catch((error) => {
-console.log(error);
-    });
+    axios
+      .post(`${base_url}/api/signin`, user)
+      .then((response) => {
+        // setData(response.data.content);
+        // setLoading(false);
+        localStorage.setItem('token', response.data.token)
+        navigate(`/dashboard`)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={8} className='d-flex justify-content-center'>
-            <CCardGroup className='w-75'>
+          <CCol md={8} className="d-flex justify-content-center">
+            <CCardGroup className="w-75">
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
@@ -55,11 +56,11 @@ console.log(error);
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput 
-                      placeholder="Email"
-                       autoComplete="email"
+                      <CFormInput
+                        placeholder="Email"
+                        autoComplete="email"
                         value={email}
-                      onChange={(e)=>setEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -71,13 +72,12 @@ console.log(error);
                         placeholder="Password"
                         autoComplete="current-password"
                         value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
-  
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
-                      <CCol xs={12} className='text-center'>
-                        <CButton color="primary" className="px-4 w-50"onClick={handdleLogin}>
+                      <CCol xs={12} className="text-center">
+                        <CButton color="primary" className="px-4 w-50" onClick={handdleLogin}>
                           Login
                         </CButton>
                       </CCol>
@@ -85,7 +85,6 @@ console.log(error);
                   </CForm>
                 </CCardBody>
               </CCard>
-          
             </CCardGroup>
           </CCol>
         </CRow>
