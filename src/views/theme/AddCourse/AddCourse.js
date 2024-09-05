@@ -47,7 +47,7 @@ function AddCourse() {
     setIsCreateCourse(true)
     const token = localStorage.getItem('token')
     axios
-      .post(`https://92.113.26.138:8080/api/course`, course, {
+      .post(`http://92.113.26.138:8080/api/course`, course, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

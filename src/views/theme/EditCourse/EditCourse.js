@@ -52,7 +52,7 @@ function EditCourse() {
 
     setIsEditing(true)
     axios
-      .put(`https://92.113.26.138:8080/api/course`, editCourse, {
+      .put(`http://92.113.26.138:8080/api/course`, editCourse, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -72,7 +72,7 @@ function EditCourse() {
     const token = localStorage.getItem('token')
     setIsGetCourse(true)
     axios
-      .get(`https://92.113.26.138:8080/api/course?courseId=${courseID}`, {
+      .get(`http://92.113.26.138:8080/api/course?courseId=${courseID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

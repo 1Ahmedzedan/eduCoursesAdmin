@@ -93,8 +93,8 @@ console.log(currentPath.includes('addNewTest'));
 
     const url =
       lessonID === undefined
-        ? `https://92.113.26.138:8080/api/course/question?courseId=${courseID}&idx=${idxPrameter}`
-        : `https://92.113.26.138:8080/api/lesson/question?lessonId=${lessonID}&timer=${timer&&timer}`
+        ? `http://92.113.26.138:8080/api/course/question?courseId=${courseID}&idx=${idxPrameter}`
+        : `http://92.113.26.138:8080/api/lesson/question?lessonId=${lessonID}&timer=${timer&&timer}`
     axios
       .post(url, createdQuestion, {
         headers: {

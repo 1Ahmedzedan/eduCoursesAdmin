@@ -12,7 +12,7 @@ function QuizesTable() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://92.113.26.138:8080/api/lessons/info?userId=${userID}`, {
+      .get(`http://92.113.26.138:8080/api/lessons/info?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

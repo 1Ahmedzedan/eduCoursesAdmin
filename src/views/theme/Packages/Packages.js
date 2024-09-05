@@ -16,7 +16,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://92.113.26.138:8080/packages/${id}`, {
+      .delete(`http://92.113.26.138:8080/packages/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .get('https://92.113.26.138:8080/packages', {
+      .get('http://92.113.26.138:8080/packages', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

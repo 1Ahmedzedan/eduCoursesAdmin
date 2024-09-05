@@ -28,7 +28,7 @@ const Login = () => {
       email:email,
       password:password
     }
-    axios.post('https://92.113.26.138:8080/api/signin',user)
+    axios.post('http://92.113.26.138:8080/api/signin',user)
     .then((response) => {
       // setData(response.data.content);
       // setLoading(false);

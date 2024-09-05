@@ -14,7 +14,7 @@ function FinalExamAnswers() {
     const token = localStorage.getItem('token')
     axios
       .get(
-        `https://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
+        `http://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
