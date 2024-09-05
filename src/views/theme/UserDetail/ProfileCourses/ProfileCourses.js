@@ -12,7 +12,7 @@ function ProfileCourses() {
   const { userID } = useParams()
   useEffect(() => {
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/courses/paid?userId=${userID}`)
+      .get(`http://92.113.26.138:8080/api/courses/paid?userId=${userID}`)
       .then((response) => {
         setUserCourses(response.data)
       })

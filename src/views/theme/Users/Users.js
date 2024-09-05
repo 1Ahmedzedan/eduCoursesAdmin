@@ -12,7 +12,7 @@ function Users() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/users`, {
+      .get(`http://92.113.26.138:8080/api/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

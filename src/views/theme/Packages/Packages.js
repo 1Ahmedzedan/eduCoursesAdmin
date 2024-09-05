@@ -16,7 +16,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/packages/${id}`, {
+      .delete(`http://92.113.26.138:8080/packages/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .get('https://courses-website-q0gf.onrender.com/packages', {
+      .get('http://92.113.26.138:8080/packages', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

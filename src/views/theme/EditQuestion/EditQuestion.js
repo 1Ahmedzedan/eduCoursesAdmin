@@ -77,8 +77,8 @@ function EditQuestion() {
     const token = localStorage.getItem('token')
     const url =
       lessonID === undefined
-        ? `https://courses-website-q0gf.onrender.com/api/course/question`
-        : `https://courses-website-q0gf.onrender.com/api/lesson/question`
+        ? `http://92.113.26.138:8080/api/course/question`
+        : `http://92.113.26.138:8080/api/lesson/question`
     axios
       .put(url, createdQuestion, {
         headers: {
@@ -110,7 +110,7 @@ function EditQuestion() {
     if (lessonID === undefined) {
       axios
         .get(
-          `https://courses-website-q0gf.onrender.com/api/course/questions?courseId=${courseID}&idx=${idx}`,
+          `http://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ function EditQuestion() {
     } else {
       axios
         .get(
-          `https://courses-website-q0gf.onrender.com/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
+          `http://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

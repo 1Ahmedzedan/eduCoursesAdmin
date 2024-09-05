@@ -52,7 +52,7 @@ function EditPackage() {
       }
       setIsEditing(true)
       axios
-        .put(`https://courses-website-q0gf.onrender.com/packages/${pkgID}`, packages, {
+        .put(`http://92.113.26.138:8080/packages/${pkgID}`, packages, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -71,7 +71,7 @@ function EditPackage() {
     const token = localStorage.getItem('token')
     setIsGetPkg(true)
     axios
-      .get(`https://courses-website-q0gf.onrender.com/packages/${pkgID}`, {
+      .get(`http://92.113.26.138:8080/packages/${pkgID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

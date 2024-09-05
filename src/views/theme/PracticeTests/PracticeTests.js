@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal';
+import { Button } from 'react-bootstrap';
 
 function PracticeTests() {
   const { courseID } = useParams()
@@ -9,6 +11,8 @@ function PracticeTests() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [modalShow, setModalShow] = React.useState(false);
+  const [timer, setTimer] = React.useState(0);
 
   const navigate = useNavigate()
 
@@ -19,7 +23,7 @@ function PracticeTests() {
 
     axios
       .delete(
-        `https://courses-website-q0gf.onrender.com/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
+        `http://92.113.26.138:8080/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +44,7 @@ function PracticeTests() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/course?courseId=${courseID}`, {
+      .get(`http://92.113.26.138:8080/api/course?courseId=${courseID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,7 +107,8 @@ function PracticeTests() {
       <div className="d-flex justify-content-end mb-4">
         <button
           className="bg-success border-0 btn px-4 py-2 text-white fw-bold"
-          onClick={() => navigate(`/addNewTest/${courseID}`)}
+          // onClick={() => navigate(`/addNewTest/${courseID}`)}
+          onClick={()=>setModalShow(true)}
         >
           Add Question To New Test
         </button>
@@ -121,6 +126,34 @@ function PracticeTests() {
           checkboxSelection
         />
       </div>
+      <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+ 
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Timer of this Test (per min)
+        </h4>
+     <input
+     placeholder='Timer'
+     className='mt-3'
+     value={timer}
+     onChange={(e)=>setTimer(e.target.value)}
+     />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={()=>{
+          
+          setModalShow(false)
+          navigate(`/addNewTest/${courseID}/${timer}`)
+          }}>Continue</Button>
+      </Modal.Footer>
+    </Modal>
     </div>
   )
 }

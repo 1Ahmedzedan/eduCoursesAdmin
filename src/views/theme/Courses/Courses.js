@@ -17,7 +17,7 @@ function Courses() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`https://courses-website-q0gf.onrender.com/api/course?courseId=${id}`, {
+      .delete(`http://92.113.26.138:8080/api/course?courseId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +35,7 @@ function Courses() {
 
   useEffect(() => {
     axios
-      .get('https://courses-website-q0gf.onrender.com/api/courses')
+      .get('http://92.113.26.138:8080/api/courses')
       .then((response) => {
         // setData(response.data.content);
         // setLoading(false);

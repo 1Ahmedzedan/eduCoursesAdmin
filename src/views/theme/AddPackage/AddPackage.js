@@ -48,7 +48,7 @@ function AddPackage() {
       description: description,
     }
     axios
-      .post('https://courses-website-q0gf.onrender.com/package', packages, {
+      .post('http://92.113.26.138:8080/package', packages, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

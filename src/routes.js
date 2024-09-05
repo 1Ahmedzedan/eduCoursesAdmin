@@ -60,7 +60,7 @@ const routes = [
     name: 'addCourse',
     element: AddQuestion,
   },
-  { path: '/addNewTest/:courseID', name: 'addNewPracticeTest', element: AddQuestion },
+  { path: '/addNewTest/:courseID/:timer', name: 'addNewPracticeTest', element: AddQuestion },
   {
     path: '/practiceTestView/addQuestion/:courseID/:idx',
     name: 'addQuestionToPracticeTest',

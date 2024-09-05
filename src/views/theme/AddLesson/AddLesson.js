@@ -31,7 +31,7 @@ function AddLesson() {
     const token = localStorage.getItem('token')
     axios
       .post(
-        `https://courses-website-q0gf.onrender.com/api/lesson?courseId=${courseID}&chapterId=${chapterID}`,
+        `http://92.113.26.138:8080/api/lesson?courseId=${courseID}&chapterId=${chapterID}`,
         lesson,
         {
           headers: {

@@ -11,7 +11,7 @@ function PromoCode() {
   useEffect(function () {
     const token = localStorage.getItem('token')
     axios
-      .get(`https://courses-website-q0gf.onrender.com/api/promocodes`, {
+      .get(`http://92.113.26.138:8080/api/promocodes`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
