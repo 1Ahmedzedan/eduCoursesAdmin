@@ -4,6 +4,7 @@ import styles from './ProfileCourses.module.css'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { base_url } from '../../../../constant'
 
 function ProfileCourses() {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ function ProfileCourses() {
   const { userID } = useParams()
   useEffect(() => {
     axios
-      .get(`http://92.113.26.138:8080/api/courses/paid?userId=${userID}`)
+      .get(`${base_url}/api/courses/paid?userId=${userID}`)
       .then((response) => {
         setUserCourses(response.data)
       })

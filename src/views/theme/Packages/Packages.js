@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function Packages() {
   const [data, setData] = useState(null)
@@ -16,7 +17,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`http://92.113.26.138:8080/packages/${id}`, {
+      .delete(`${base_url}/packages/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +37,7 @@ function Packages() {
     const token = localStorage.getItem('token')
 
     axios
-      .get('http://92.113.26.138:8080/packages', {
+      .get(`${base_url}/packages`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

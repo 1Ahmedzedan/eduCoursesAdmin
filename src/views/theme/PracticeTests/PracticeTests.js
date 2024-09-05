@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
-import Modal from 'react-bootstrap/Modal';
-import { Button } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal'
+import { Button } from 'react-bootstrap'
+import { base_url } from '../../../constant'
 
 function PracticeTests() {
   const { courseID } = useParams()
@@ -11,8 +12,8 @@ function PracticeTests() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
-  const [modalShow, setModalShow] = React.useState(false);
-  const [timer, setTimer] = React.useState(0);
+  const [modalShow, setModalShow] = React.useState(false)
+  const [timer, setTimer] = React.useState(0)
 
   const navigate = useNavigate()
 
@@ -22,14 +23,11 @@ function PracticeTests() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(
-        `http://92.113.26.138:8080/api/course/finalquiz?courseId=${courseID}&idx=${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .delete(`${base_url}/api/course/finalquiz?courseId=${courseID}&idx=${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then((response) => {
         const data = response.data
       })
@@ -44,7 +42,7 @@ function PracticeTests() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/course?courseId=${courseID}`, {
+      .get(`${base_url}/api/course?courseId=${courseID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,7 +106,7 @@ function PracticeTests() {
         <button
           className="bg-success border-0 btn px-4 py-2 text-white fw-bold"
           // onClick={() => navigate(`/addNewTest/${courseID}`)}
-          onClick={()=>setModalShow(true)}
+          onClick={() => setModalShow(true)}
         >
           Add Question To New Test
         </button>
@@ -129,31 +127,31 @@ function PracticeTests() {
       <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
- 
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Timer of this Test (per min)
-        </h4>
-     <input
-     placeholder='Timer'
-     className='mt-3'
-     value={timer}
-     onChange={(e)=>setTimer(e.target.value)}
-     />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={()=>{
-          
-          setModalShow(false)
-          navigate(`/addNewTest/${courseID}/${timer}`)
-          }}>Continue</Button>
-      </Modal.Footer>
-    </Modal>
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <h4>Timer of this Test (per min)</h4>
+          <input
+            placeholder="Timer"
+            className="mt-3"
+            value={timer}
+            onChange={(e) => setTimer(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() => {
+              setModalShow(false)
+              navigate(`/addNewTest/${courseID}/${timer}`)
+            }}
+          >
+            Continue
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function EditPackage() {
   const { pkgID } = useParams()
@@ -52,7 +53,7 @@ function EditPackage() {
       }
       setIsEditing(true)
       axios
-        .put(`http://92.113.26.138:8080/packages/${pkgID}`, packages, {
+        .put(`${base_url}/packages/${pkgID}`, packages, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -71,7 +72,7 @@ function EditPackage() {
     const token = localStorage.getItem('token')
     setIsGetPkg(true)
     axios
-      .get(`http://92.113.26.138:8080/packages/${pkgID}`, {
+      .get(`${base_url}/packages/${pkgID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

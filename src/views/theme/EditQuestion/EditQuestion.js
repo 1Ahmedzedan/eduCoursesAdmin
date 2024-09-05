@@ -14,6 +14,7 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useLocation, useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 // import { DocsExample } from 'src/components'
 
 function EditQuestion() {
@@ -76,9 +77,7 @@ function EditQuestion() {
     setIsEditQuestion(true)
     const token = localStorage.getItem('token')
     const url =
-      lessonID === undefined
-        ? `http://92.113.26.138:8080/api/course/question`
-        : `http://92.113.26.138:8080/api/lesson/question`
+      lessonID === undefined ? `${base_url}/api/course/question` : `${base_url}/api/lesson/question`
     axios
       .put(url, createdQuestion, {
         headers: {
@@ -109,14 +108,11 @@ function EditQuestion() {
     const token = localStorage.getItem('token')
     if (lessonID === undefined) {
       axios
-        .get(
-          `http://92.113.26.138:8080/api/course/questions?courseId=${courseID}&idx=${idx}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        .get(`${base_url}/api/course/questions?courseId=${courseID}&idx=${idx}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        )
+        })
         .then((response) => {
           const q = response.data[QuestionIdx]
           setData(response.data[QuestionIdx])
@@ -138,14 +134,11 @@ function EditQuestion() {
         })
     } else {
       axios
-        .get(
-          `http://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        .get(`${base_url}/api/lesson/questions?lessonId=${lessonID}&level=${levelPram}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        )
+        })
         .then((response) => {
           const q = response.data[QuestionIdx]
           setData(response.data[QuestionIdx])

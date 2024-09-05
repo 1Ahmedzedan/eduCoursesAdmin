@@ -3,6 +3,7 @@ import Question from '../Question/Question'
 import styles from './QuizAnswerContainer.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { base_url } from '../../../constant'
 function QuizAnswerContainer() {
   const { lessonID, courseID, level } = useParams()
   const [questions, setQuistions] = useState()
@@ -14,14 +15,11 @@ function QuizAnswerContainer() {
     setLoading(true)
     const token = localStorage.getItem('token')
     axios
-      .get(
-        `http://92.113.26.138:8080/api/lesson/questions?lessonId=${lessonID}&level=${level}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .get(`${base_url}/api/lesson/questions?lessonId=${lessonID}&level=${level}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then((response) => {
         setQuistions(response.data)
       })

@@ -4,6 +4,7 @@ import ProfileNavbar from '../ProfileNavbar/ProfileNavbar'
 import styles from './ProfileContainer.module.css'
 import { stringify } from 'postcss'
 import axios from 'axios'
+import { base_url } from '../../../../constant'
 
 function ProfileContainer() {
   const { userID } = useParams()
@@ -13,7 +14,7 @@ function ProfileContainer() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/user?userId=${userID}`, {
+      .get(`${base_url}/api/user?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

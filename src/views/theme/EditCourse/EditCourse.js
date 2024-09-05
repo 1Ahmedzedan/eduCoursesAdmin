@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 // import { DocsExample } from 'src/components'
 
 function EditCourse() {
@@ -52,7 +53,7 @@ function EditCourse() {
 
     setIsEditing(true)
     axios
-      .put(`http://92.113.26.138:8080/api/course`, editCourse, {
+      .put(`${base_url}/api/course`, editCourse, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -72,7 +73,7 @@ function EditCourse() {
     const token = localStorage.getItem('token')
     setIsGetCourse(true)
     axios
-      .get(`http://92.113.26.138:8080/api/course?courseId=${courseID}`, {
+      .get(`${base_url}/api/course?courseId=${courseID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

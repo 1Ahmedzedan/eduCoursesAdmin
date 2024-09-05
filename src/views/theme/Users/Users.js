@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function Users() {
   const [data, setData] = useState(null)
@@ -12,7 +13,7 @@ function Users() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/users`, {
+      .get(`${base_url}/api/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

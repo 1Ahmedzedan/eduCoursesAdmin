@@ -3,6 +3,7 @@ import styles from './FinalExamsTable.module.css'
 import TableRow from './TableRow'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { base_url } from '../../../../constant'
 
 function FinalExamsTable() {
   const { userID } = useParams()
@@ -11,7 +12,7 @@ function FinalExamsTable() {
 
   useEffect(() => {
     axios
-      .get(`http://92.113.26.138:8080/api/courses/info?userId=${userID}`)
+      .get(`${base_url}/api/courses/info?userId=${userID}`)
       .then((response) => {
         setAttendedExams(response.data)
       })

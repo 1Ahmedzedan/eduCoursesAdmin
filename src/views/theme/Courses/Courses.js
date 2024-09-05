@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function Courses() {
   const [data, setData] = useState(null)
@@ -17,7 +18,7 @@ function Courses() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`http://92.113.26.138:8080/api/course?courseId=${id}`, {
+      .delete(`${base_url}/api/course?courseId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +36,7 @@ function Courses() {
 
   useEffect(() => {
     axios
-      .get('http://92.113.26.138:8080/api/courses')
+      .get(`${base_url}/api/courses`)
       .then((response) => {
         // setData(response.data.content);
         // setLoading(false);

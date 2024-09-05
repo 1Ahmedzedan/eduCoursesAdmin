@@ -12,6 +12,7 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function AddChapter() {
   const { courseID } = useParams()
@@ -28,7 +29,7 @@ function AddChapter() {
     setIsCreateLesson(true)
     const token = localStorage.getItem('token')
     axios
-      .post(`http://92.113.26.138:8080/api/chapter`, chapter, {
+      .post(`${base_url}/api/chapter`, chapter, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

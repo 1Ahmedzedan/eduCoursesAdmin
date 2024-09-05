@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function Chapters() {
   const { courseID } = useParams()
@@ -18,7 +19,7 @@ function Chapters() {
     const token = localStorage.getItem('token')
 
     axios
-      .delete(`http://92.113.26.138:8080/api/chapter/${id}?chapterId=${id}`, {
+      .delete(`${base_url}/api/chapter/${id}?chapterId=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,14 +38,11 @@ function Chapters() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(
-        `http://92.113.26.138:8080/api/chapter/course/${courseID}?courseId=${courseID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .get(`${base_url}/api/chapter/course/${courseID}?courseId=${courseID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then((response) => {
         const transformedData = response.data.map((item) => ({
           id: item.id,

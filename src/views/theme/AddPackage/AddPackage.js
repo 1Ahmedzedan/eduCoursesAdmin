@@ -12,6 +12,7 @@ import {
 } from '@coreui/react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { base_url } from '../../../constant'
 
 function AddPackage() {
   const [name, setName] = useState('')
@@ -48,7 +49,7 @@ function AddPackage() {
       description: description,
     }
     axios
-      .post('http://92.113.26.138:8080/package', packages, {
+      .post(`${base_url}/package`, packages, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

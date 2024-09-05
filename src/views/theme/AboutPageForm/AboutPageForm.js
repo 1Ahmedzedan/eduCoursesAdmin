@@ -12,6 +12,7 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function AboutPageForm() {
   const [isSubmited, setIsSubmited] = useState(false)
@@ -29,15 +30,11 @@ function AboutPageForm() {
     setIsSubmited(true)
     const token = localStorage.getItem('token')
     axios
-      .put(
-        `http://92.113.26.138:8080/api/pages/66bb64360c9ba27f7be93739?id=66bb64360c9ba27f7be93739`,
-        page,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .put(`${base_url}/api/pages/66bb64360c9ba27f7be93739?id=66bb64360c9ba27f7be93739`, page, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(() => {})
       .then((error) => {
         console.log(error)
@@ -50,7 +47,7 @@ function AboutPageForm() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/pages`, {
+      .get(`${base_url}/api/pages`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -13,6 +13,7 @@ import {
 } from '@coreui/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 // import { DocsExample } from 'src/components'
 
 function AddLesson() {
@@ -30,15 +31,11 @@ function AddLesson() {
     setIsCreateLesson(true)
     const token = localStorage.getItem('token')
     axios
-      .post(
-        `http://92.113.26.138:8080/api/lesson?courseId=${courseID}&chapterId=${chapterID}`,
-        lesson,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .post(`${base_url}/api/lesson?courseId=${courseID}&chapterId=${chapterID}`, lesson, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then(() => {
         setName('')
       })

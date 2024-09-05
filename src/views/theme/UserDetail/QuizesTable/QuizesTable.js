@@ -3,6 +3,7 @@ import styles from './QuizesTable.module.css'
 import QuizesTableRow from './QuizesTableRow'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { base_url } from '../../../../constant'
 
 function QuizesTable() {
   const { userID } = useParams()
@@ -12,7 +13,7 @@ function QuizesTable() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/lessons/info?userId=${userID}`, {
+      .get(`${base_url}/api/lessons/info?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

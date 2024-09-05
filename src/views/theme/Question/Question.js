@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './Question.module.css'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { base_url } from '../../../constant'
 
 function Question({ question, questionIndex, setIsDeleteQuestion }) {
   const { lessonID, courseID, level, idx } = useParams()
@@ -13,8 +14,8 @@ function Question({ question, questionIndex, setIsDeleteQuestion }) {
     setIsDeleting(true)
     const url =
       lessonID === undefined
-        ? `http://92.113.26.138:8080/api/course/question?questionId=${question.id}&idx=${idx}`
-        : `http://92.113.26.138:8080/api/lesson/question?questionId=${question.id}`
+        ? `${base_url}/api/course/question?questionId=${question.id}&idx=${idx}`
+        : `${base_url}/api/lesson/question?questionId=${question.id}`
     axios
       .delete(url, {
         headers: {

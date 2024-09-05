@@ -12,6 +12,7 @@ import {
   CRow,
 } from '@coreui/react'
 import axios from 'axios'
+import { base_url } from '../../../constant'
 
 function AddPromoCode() {
   const [discountValue, setDiscountValue] = useState(0)
@@ -24,7 +25,7 @@ function AddPromoCode() {
     const token = localStorage.getItem('token')
     axios
       .post(
-        `http://92.113.26.138:8080/api/promocode?discount=${discountValue}&expiryDateByMonth=${expired}`,
+        `${base_url}/api/promocode?discount=${discountValue}&expiryDateByMonth=${expired}`,
         null,
         {
           headers: {

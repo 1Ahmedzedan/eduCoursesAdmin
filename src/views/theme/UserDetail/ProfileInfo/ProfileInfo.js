@@ -4,6 +4,7 @@ import styles from './ProfileInfo.module.css'
 import { Link, useParams } from 'react-router-dom'
 import userIcon from '../../../../assets/images/userIcon.png'
 import axios from 'axios'
+import { base_url } from '../../../../constant'
 
 function ProfileInfo() {
   const { userID } = useParams()
@@ -14,7 +15,7 @@ function ProfileInfo() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/user?userId=${userID}`, {
+      .get(`${base_url}/api/user?userId=${userID}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

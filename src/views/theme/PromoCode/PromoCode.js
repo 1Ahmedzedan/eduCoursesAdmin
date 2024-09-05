@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { base_url } from '../../../constant'
 
 function PromoCode() {
   const [data, setData] = useState()
@@ -11,7 +12,7 @@ function PromoCode() {
   useEffect(function () {
     const token = localStorage.getItem('token')
     axios
-      .get(`http://92.113.26.138:8080/api/promocodes`, {
+      .get(`${base_url}/api/promocodes`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
