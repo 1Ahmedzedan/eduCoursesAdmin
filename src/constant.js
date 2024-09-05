@@ -1,1 +1,1 @@
-export const base_url = '/api/proxy'
+export const base_url = 'api/proxy'
